@@ -8,6 +8,8 @@
 * Adds a splash of colour to your goats, based on which horn they drop
 * Adds a letter to their backs too
 
+![Included textures: white for normal goats and grey for screaming](https://cdn.modrinth.com/data/biTPC5IL/images/76b8f5732ae4ed29806103205cf0ebcb6bb55b01.png)
+
 ---
 
 ### Installation
