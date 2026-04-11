@@ -1,4 +1,4 @@
-package dev.geri.screaminggoats;
+package kiwi.allantaylor.paintedgoats;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
@@ -7,9 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Environment(EnvType.CLIENT)
-public class ScreamingGoats implements ClientModInitializer {
+public class PaintedGoats implements ClientModInitializer {
 
-    private static final Logger logger = LoggerFactory.getLogger("ScreamingGoats");
+    private static final Logger logger = LoggerFactory.getLogger("PaintedGoats");
 
     @Override
     public void onInitializeClient() {

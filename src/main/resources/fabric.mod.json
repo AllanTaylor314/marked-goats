@@ -1,28 +1,28 @@
 {
   "schemaVersion": 1,
-  "id": "screaminggoats",
+  "id": "paintedgoats",
   "version": "${version}",
-  "name": "ScreamingGoats",
-  "description": "Easily differentiate good goats apart",
+  "name": "PaintedGoats",
+  "description": "Easily differentiate goats by which horn they drop",
   "authors": [
+    "AllanTaylor314",
     "Geri",
     "znopp"
   ],
   "contact": {
-    "website": "https://geri.dev",
-    "issues": "https://github.com/notgeri/screaminggoats/issues",
-    "repo": "https://github.com/notgeri/screaminggoats"
+    "issues": "https://github.com/AllanTaylor314/painted-goats/issues",
+    "repo": "https://github.com/AllanTaylor314/painted-goats"
   },
   "license": "MIT",
-  "icon": "assets/screaminggoats/icon.png",
+  "icon": "assets/paintedgoats/icon.png",
   "environment": "client",
   "entrypoints": {
     "client": [
-      "dev.geri.screaminggoats.ScreamingGoats"
+      "kiwi.allantaylor.paintedgoats.PaintedGoats"
     ]
   },
   "mixins": [
-    "screaminggoats.mixins.json"
+    "paintedgoats.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.16.9",

@@ -1,4 +1,4 @@
-package dev.geri.screaminggoats.mixins;
+package kiwi.allantaylor.paintedgoats.mixins;
 
 import net.minecraft.client.render.entity.GoatEntityRenderer;
 import net.minecraft.client.render.entity.state.GoatEntityRenderState;
@@ -10,6 +10,8 @@ import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.random.Random;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -22,8 +24,10 @@ import java.util.WeakHashMap;
 @Mixin(GoatEntityRenderer.class)
 public class GoatMixins {
 
+    private static final Logger logger = LoggerFactory.getLogger("PaintedGoats");
+
     @Unique
-    private static final Identifier SCREAMING_TEXTURE = Identifier.of("screaminggoats", "screaming_goat.png");
+    private static final Identifier SCREAMING_TEXTURE = Identifier.of("paintedgoats", "screaming_goat.png");
 
     // Map to store the association between GoatEntityRenderState and GoatEntity
     @Unique
@@ -44,6 +48,9 @@ public class GoatMixins {
     @Inject(method = "getTexture(Lnet/minecraft/client/render/entity/state/GoatEntityRenderState;)Lnet/minecraft/util/Identifier;",
             at = @At("HEAD"), cancellable = true)
     public void getTexture(GoatEntityRenderState goatEntityRenderState, CallbackInfoReturnable<Identifier> cir) {
+        // logger.info("Rendering a goat");
+        // cir.setReturnValue(SCREAMING_TEXTURE);
+        // /*
         // Fetch the associated entity from the map
         GoatEntity goatEntity = renderStateToEntityMap.get(goatEntityRenderState);
         if (goatEntity != null) {
@@ -52,7 +59,7 @@ public class GoatMixins {
             TagKey<Instrument> tagKey = goatEntity.isScreaming() ? InstrumentTags.SCREAMING_GOAT_HORNS : InstrumentTags.REGULAR_GOAT_HORNS;
             Identifier texture = goatEntity.getEntityWorld().getRegistryManager().getOrThrow(RegistryKeys.INSTRUMENT).getRandomEntry(tagKey, random).map((instrument) -> {
                 String name = instrument.getIdAsString();
-                return Identifier.of("screaminggoats", name.substring(10, name.length() - 10) + ".png");
+                return Identifier.of("paintedgoats", name.substring(10, name.length() - 10) + ".png");
             }).orElseGet(() -> null);
             if (texture != null) {
                 cir.setReturnValue(texture);
@@ -60,5 +67,6 @@ public class GoatMixins {
                 cir.setReturnValue(SCREAMING_TEXTURE);
             }
         }
+        //    */
     }
 }
