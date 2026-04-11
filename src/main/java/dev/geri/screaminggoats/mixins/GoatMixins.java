@@ -3,7 +3,13 @@ package dev.geri.screaminggoats.mixins;
 import net.minecraft.client.render.entity.GoatEntityRenderer;
 import net.minecraft.client.render.entity.state.GoatEntityRenderState;
 import net.minecraft.entity.passive.GoatEntity;
+import net.minecraft.item.Instrument;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.InstrumentTags;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.random.Random;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -40,8 +46,19 @@ public class GoatMixins {
     public void getTexture(GoatEntityRenderState goatEntityRenderState, CallbackInfoReturnable<Identifier> cir) {
         // Fetch the associated entity from the map
         GoatEntity goatEntity = renderStateToEntityMap.get(goatEntityRenderState);
-        if (goatEntity != null && goatEntity.isScreaming()) {
-            cir.setReturnValue(SCREAMING_TEXTURE);
+        if (goatEntity != null) {
+            // This is the same "randomness" used to determine which horn to drop, which is determined by the entity UUID
+            Random random = Random.create((long)goatEntity.getUuid().hashCode());
+            TagKey<Instrument> tagKey = goatEntity.isScreaming() ? InstrumentTags.SCREAMING_GOAT_HORNS : InstrumentTags.REGULAR_GOAT_HORNS;
+            Identifier texture = goatEntity.getEntityWorld().getRegistryManager().getOrThrow(RegistryKeys.INSTRUMENT).getRandomEntry(tagKey, random).map((instrument) -> {
+                String name = instrument.getIdAsString();
+                return Identifier.of("screaminggoats", name.substring(10, name.length() - 10) + ".png");
+            }).orElseGet(() -> null);
+            if (texture != null) {
+                cir.setReturnValue(texture);
+            } else if (goatEntity.isScreaming()) {
+                cir.setReturnValue(SCREAMING_TEXTURE);
+            }
         }
     }
 }
