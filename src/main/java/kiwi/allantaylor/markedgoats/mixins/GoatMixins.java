@@ -10,8 +10,6 @@ import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.random.Random;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -23,9 +21,6 @@ import java.util.WeakHashMap;
 
 @Mixin(GoatEntityRenderer.class)
 public class GoatMixins {
-
-    private static final Logger logger = LoggerFactory.getLogger("MarkedGoats");
-
     @Unique
     private static final Identifier SCREAMING_TEXTURE = Identifier.of("markedgoats", "screaming_goat.png");
 
@@ -48,10 +43,6 @@ public class GoatMixins {
     @Inject(method = "getTexture(Lnet/minecraft/client/render/entity/state/GoatEntityRenderState;)Lnet/minecraft/util/Identifier;",
             at = @At("HEAD"), cancellable = true)
     public void getTexture(GoatEntityRenderState goatEntityRenderState, CallbackInfoReturnable<Identifier> cir) {
-        // logger.info("Rendering a goat");
-        // cir.setReturnValue(SCREAMING_TEXTURE);
-        // /*
-        // Fetch the associated entity from the map
         GoatEntity goatEntity = renderStateToEntityMap.get(goatEntityRenderState);
         if (goatEntity != null) {
             // This is the same "randomness" used to determine which horn to drop, which is determined by the entity UUID
@@ -67,6 +58,5 @@ public class GoatMixins {
                 cir.setReturnValue(SCREAMING_TEXTURE);
             }
         }
-        //    */
     }
 }
