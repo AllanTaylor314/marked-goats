@@ -3,12 +3,7 @@ package kiwi.allantaylor.markedgoats.mixins;
 import net.minecraft.client.render.entity.GoatEntityRenderer;
 import net.minecraft.client.render.entity.state.GoatEntityRenderState;
 import net.minecraft.entity.passive.GoatEntity;
-import net.minecraft.item.Instrument;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.InstrumentTags;
-import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.random.Random;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -16,6 +11,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import kiwi.allantaylor.markedgoats.util.GoatVariantUtil;
 
 import java.util.WeakHashMap;
 
@@ -42,15 +39,10 @@ public class GoatMixins {
     public void getTexture(GoatEntityRenderState goatEntityRenderState, CallbackInfoReturnable<Identifier> cir) {
         GoatEntity goatEntity = renderStateToEntityMap.get(goatEntityRenderState);
         if (goatEntity != null) {
-            // This is the same "randomness" used to determine which horn to drop, which is determined by the entity UUID
-            Random random = Random.create((long)goatEntity.getUuid().hashCode());
-            TagKey<Instrument> tagKey = goatEntity.isScreaming() ? InstrumentTags.SCREAMING_GOAT_HORNS : InstrumentTags.REGULAR_GOAT_HORNS;
-            Identifier texture = goatEntity.getEntityWorld().getRegistryManager().getOrThrow(RegistryKeys.INSTRUMENT).getRandomEntry(tagKey, random).map((instrument) -> {
-                String name = instrument.getIdAsString();
-                return Identifier.of("markedgoats", name.substring(10, name.length() - 10) + ".png");
-            }).orElseGet(() -> null);
-            if (texture != null) {
-                cir.setReturnValue(texture);
+            String variety = GoatVariantUtil.getInstrumentNameFromGoat(goatEntity);
+            
+            if (variety != null) {
+                cir.setReturnValue(Identifier.of("markedgoats", variety + ".png"));
             }
         }
     }
