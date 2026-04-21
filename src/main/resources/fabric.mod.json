@@ -16,11 +16,6 @@
   "license": "MIT",
   "icon": "assets/paintedgoats/icon.png",
   "environment": "client",
-  "entrypoints": {
-    "client": [
-      "kiwi.allantaylor.paintedgoats.PaintedGoats"
-    ]
-  },
   "mixins": [
     "paintedgoats.mixins.json"
   ],
