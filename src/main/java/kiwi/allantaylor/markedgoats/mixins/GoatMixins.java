@@ -21,9 +21,6 @@ import java.util.WeakHashMap;
 
 @Mixin(GoatEntityRenderer.class)
 public class GoatMixins {
-    @Unique
-    private static final Identifier SCREAMING_TEXTURE = Identifier.of("markedgoats", "screaming_goat.png");
-
     // Map to store the association between GoatEntityRenderState and GoatEntity
     @Unique
     private final WeakHashMap<GoatEntityRenderState, GoatEntity> renderStateToEntityMap = new WeakHashMap<>();
@@ -54,8 +51,6 @@ public class GoatMixins {
             }).orElseGet(() -> null);
             if (texture != null) {
                 cir.setReturnValue(texture);
-            } else if (goatEntity.isScreaming()) {
-                cir.setReturnValue(SCREAMING_TEXTURE);
             }
         }
     }
