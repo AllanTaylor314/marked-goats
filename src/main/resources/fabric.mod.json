@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "id": "paintedgoats",
+  "id": "markedgoats",
   "version": "${version}",
-  "name": "PaintedGoats",
+  "name": "MarkedGoats",
   "description": "Easily differentiate goats by which horn they drop",
   "authors": [
     "AllanTaylor314",
@@ -10,14 +10,14 @@
     "znopp"
   ],
   "contact": {
-    "issues": "https://github.com/AllanTaylor314/painted-goats/issues",
-    "repo": "https://github.com/AllanTaylor314/painted-goats"
+    "issues": "https://github.com/AllanTaylor314/marked-goats/issues",
+    "repo": "https://github.com/AllanTaylor314/marked-goats"
   },
   "license": "MIT",
-  "icon": "assets/paintedgoats/icon.png",
+  "icon": "assets/markedgoats/icon.png",
   "environment": "client",
   "mixins": [
-    "paintedgoats.mixins.json"
+    "markedgoats.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.16.9",

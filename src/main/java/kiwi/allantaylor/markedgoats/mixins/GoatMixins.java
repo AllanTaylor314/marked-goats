@@ -1,4 +1,4 @@
-package kiwi.allantaylor.paintedgoats.mixins;
+package kiwi.allantaylor.markedgoats.mixins;
 
 import net.minecraft.client.render.entity.GoatEntityRenderer;
 import net.minecraft.client.render.entity.state.GoatEntityRenderState;
@@ -24,10 +24,10 @@ import java.util.WeakHashMap;
 @Mixin(GoatEntityRenderer.class)
 public class GoatMixins {
 
-    private static final Logger logger = LoggerFactory.getLogger("PaintedGoats");
+    private static final Logger logger = LoggerFactory.getLogger("MarkedGoats");
 
     @Unique
-    private static final Identifier SCREAMING_TEXTURE = Identifier.of("paintedgoats", "screaming_goat.png");
+    private static final Identifier SCREAMING_TEXTURE = Identifier.of("markedgoats", "screaming_goat.png");
 
     // Map to store the association between GoatEntityRenderState and GoatEntity
     @Unique
@@ -59,7 +59,7 @@ public class GoatMixins {
             TagKey<Instrument> tagKey = goatEntity.isScreaming() ? InstrumentTags.SCREAMING_GOAT_HORNS : InstrumentTags.REGULAR_GOAT_HORNS;
             Identifier texture = goatEntity.getEntityWorld().getRegistryManager().getOrThrow(RegistryKeys.INSTRUMENT).getRandomEntry(tagKey, random).map((instrument) -> {
                 String name = instrument.getIdAsString();
-                return Identifier.of("paintedgoats", name.substring(10, name.length() - 10) + ".png");
+                return Identifier.of("markedgoats", name.substring(10, name.length() - 10) + ".png");
             }).orElseGet(() -> null);
             if (texture != null) {
                 cir.setReturnValue(texture);
