@@ -3,7 +3,6 @@ package kiwi.allantaylor.markedgoats;
 import mcp.mobius.waila.api.*;
 import mcp.mobius.waila.api.component.ItemComponent;
 import net.minecraft.entity.passive.GoatEntity;
-import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
@@ -25,8 +24,24 @@ public class MarkedGoatsWailaPlugin implements IWailaCommonPlugin, IWailaClientP
 
     @Override
     public void register(IClientRegistrar registrar) {
+        registrar.head(this, GoatEntity.class);
         registrar.body(this, GoatEntity.class);
         registrar.icon(this, GoatEntity.class);
+    }
+
+    @Override
+    public void appendHead(@NotNull ITooltip tooltip, IEntityAccessor accessor, @NotNull IPluginConfig config) {
+        if (accessor.getEntity() instanceof GoatEntity goat && goat.isScreaming() && config.getBoolean(SHOW_IS_SCREAMING)) {
+            var formatter = IWailaConfig.get().getFormatter();
+            var customName = goat.getCustomName();
+            Text fullName = Text.translatable("marked_goats.screaming_goat");
+
+            if (customName != null) {
+                fullName = customName.copy().append(" (").append(fullName).append(")");
+            }
+
+            tooltip.setLine(WailaConstants.OBJECT_NAME_TAG, formatter.entityName(fullName));
+        }
     }
 
     @Override
@@ -34,25 +49,9 @@ public class MarkedGoatsWailaPlugin implements IWailaCommonPlugin, IWailaClientP
         if (!(accessor.getEntity() instanceof GoatEntity entity)) {
             return;
         }
-        MutableText text = Text.empty();
-        var hasText = false;
         if (config.getBoolean(SHOW_INSTRUMENT)) {
             String instrumentName = getInstrumentNameFromGoat(entity);
-            text.append(Text.translatable("instrument.minecraft." + instrumentName + "_goat_horn"));
-            hasText = true;
-        }
-        if (config.getBoolean(SHOW_IS_SCREAMING)) {
-            var screamingKey = "marked_goats." + (entity.isScreaming() ? "screaming" : "normal");
-            var screamingText = Text.translatable(screamingKey);
-            if (hasText) {
-                text.append(Text.literal(" ("));
-                screamingText.append(Text.literal(")"));
-            }
-            text.append(screamingText);
-            hasText = true;
-        }
-        if (hasText) {
-            tooltip.addLine(text);
+            tooltip.addLine(Text.translatable("instrument.minecraft." + instrumentName + "_goat_horn"));
         }
     }
 
