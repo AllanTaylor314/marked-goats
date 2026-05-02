@@ -2,10 +2,14 @@ package kiwi.allantaylor.markedgoats;
 
 import mcp.mobius.waila.api.*;
 import mcp.mobius.waila.api.component.ItemComponent;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.UseCooldownComponent;
 import net.minecraft.entity.passive.GoatEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Optional;
 
 import static kiwi.allantaylor.markedgoats.util.GoatVariantUtil.getInstrumentNameFromGoat;
 
@@ -14,6 +18,9 @@ public class MarkedGoatsWailaPlugin implements IWailaCommonPlugin, IWailaClientP
     public static final Identifier SHOW_ICON = Identifier.of("marked_goats:show_icon");
     public static final Identifier SHOW_INSTRUMENT = Identifier.of("marked_goats:show_instrument");
     public static final Identifier SHOW_IS_SCREAMING = Identifier.of("marked_goats:show_is_screaming");
+
+    // Remove the cooldown overlay from icons
+    public static final UseCooldownComponent FAKE_COOLDOWN = new UseCooldownComponent(0, Optional.of(Identifier.of("marked_goats:fake_horn_cooldown")));
 
     @Override
     public void register(ICommonRegistrar registrar) {
@@ -62,6 +69,7 @@ public class MarkedGoatsWailaPlugin implements IWailaCommonPlugin, IWailaClientP
         }
         if (config.getBoolean(SHOW_ICON)) {
             var stack = entity.getGoatHornStack();
+            stack.set(DataComponentTypes.USE_COOLDOWN, FAKE_COOLDOWN);
             return new ItemComponent(stack);
         }
         return null;
