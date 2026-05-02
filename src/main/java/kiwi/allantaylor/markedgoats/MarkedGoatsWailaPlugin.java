@@ -3,6 +3,7 @@ package kiwi.allantaylor.markedgoats;
 import mcp.mobius.waila.api.*;
 import mcp.mobius.waila.api.component.ItemComponent;
 import net.minecraft.entity.passive.GoatEntity;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
@@ -33,12 +34,25 @@ public class MarkedGoatsWailaPlugin implements IWailaCommonPlugin, IWailaClientP
         if (!(accessor.getEntity() instanceof GoatEntity entity)) {
             return;
         }
+        MutableText text = Text.empty();
+        var hasText = false;
         if (config.getBoolean(SHOW_INSTRUMENT)) {
             String instrumentName = getInstrumentNameFromGoat(entity);
-            tooltip.addLine(Text.translatable("instrument.minecraft." + instrumentName + "_goat_horn"));
+            text.append(Text.translatable("instrument.minecraft." + instrumentName + "_goat_horn"));
+            hasText = true;
         }
         if (config.getBoolean(SHOW_IS_SCREAMING)) {
-            tooltip.addLine(Text.translatable("marked_goats." + (entity.isScreaming() ? "screaming" : "normal")));
+            var screamingKey = "marked_goats." + (entity.isScreaming() ? "screaming" : "normal");
+            var screamingText = Text.translatable(screamingKey);
+            if (hasText) {
+                text.append(Text.literal(" ("));
+                screamingText.append(Text.literal(")"));
+            }
+            text.append(screamingText);
+            hasText = true;
+        }
+        if (hasText) {
+            tooltip.addLine(text);
         }
     }
 
