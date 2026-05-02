@@ -36,8 +36,6 @@ public class GoatVariantUtil {
         TagKey<Instrument> tagKey = goatEntity.isScreaming() ? InstrumentTags.SCREAMING_GOAT_HORNS
                 : InstrumentTags.REGULAR_GOAT_HORNS;
         return goatEntity.getEntityWorld().getRegistryManager().getOrThrow(RegistryKeys.INSTRUMENT)
-                .getRandomEntry(tagKey, random).map((instrument) -> {
-                    return getNameFromInstrument(instrument);
-                }).orElse(null);
+                .getRandomEntry(tagKey, random).map(GoatVariantUtil::getNameFromInstrument).orElse(null);
     }
 }
