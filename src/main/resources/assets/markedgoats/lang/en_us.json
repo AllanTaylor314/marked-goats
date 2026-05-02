@@ -1,0 +1,8 @@
+{
+  "marked_goats.screaming": "Screaming",
+  "marked_goats.normal": "Normal",
+  "config.waila.plugin_marked_goats": "Marked Goats",
+  "config.waila.plugin_marked_goats.show_icon": "Show horn item as icon",
+  "config.waila.plugin_marked_goats.show_instrument": "Show instrument name",
+  "config.waila.plugin_marked_goats.show_is_screaming": "Show whether is screaming"
+}
