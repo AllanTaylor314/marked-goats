@@ -1,0 +1,7 @@
+{
+  "marked_goats.screaming_goat": "Cabra chillona",
+  "config.waila.plugin_marked_goats": "Cabras Marcadas",
+  "config.waila.plugin_marked_goats.show_icon": "Mostrar objeto de cuerno como icono",
+  "config.waila.plugin_marked_goats.show_instrument": "Mostrar nombre del instrumento",
+  "config.waila.plugin_marked_goats.show_is_screaming": "Mostrar estado de grito"
+}

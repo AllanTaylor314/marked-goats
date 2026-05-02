@@ -1,0 +1,7 @@
+{
+  "marked_goats.screaming_goat": "Kambing na Sumisigaw",
+  "config.waila.plugin_marked_goats": "Minarkahang Kambing",
+  "config.waila.plugin_marked_goats.show_icon": "Ipakita ang sungay na item bilang icon",
+  "config.waila.plugin_marked_goats.show_instrument": "Ipakita ang pangalan ng instrumento",
+  "config.waila.plugin_marked_goats.show_is_screaming": "Ipakita ang katayuan ng pagsigaw"
+}

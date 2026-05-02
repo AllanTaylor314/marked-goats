@@ -1,0 +1,7 @@
+{
+  "marked_goats.screaming_goat": "Cabra berrante",
+  "config.waila.plugin_marked_goats": "Cabras Marcadas",
+  "config.waila.plugin_marked_goats.show_icon": "Mostrar item de chifre como \u00edcone",
+  "config.waila.plugin_marked_goats.show_instrument": "Mostrar nome do instrumento",
+  "config.waila.plugin_marked_goats.show_is_screaming": "Mostrar estado berrante"
+}

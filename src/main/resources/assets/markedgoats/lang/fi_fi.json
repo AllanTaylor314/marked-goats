@@ -1,0 +1,7 @@
+{
+  "marked_goats.screaming_goat": "Kirkuva vuohi",
+  "config.waila.plugin_marked_goats": "Merkatut vuohet",
+  "config.waila.plugin_marked_goats.show_icon": "N\u00e4yt\u00e4 sarviesine kuvakkeena",
+  "config.waila.plugin_marked_goats.show_instrument": "N\u00e4yt\u00e4 instrumentin nimi",
+  "config.waila.plugin_marked_goats.show_is_screaming": "N\u00e4yt\u00e4 kirkumisstatus"
+}

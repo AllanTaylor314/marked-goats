@@ -1,0 +1,7 @@
+{
+  "marked_goats.screaming_goat": "\u5c16\u53eb\u5c71\u7f8a",
+  "config.waila.plugin_marked_goats": "\u5df2\u6807\u8bb0\u7684\u5c71\u7f8a",
+  "config.waila.plugin_marked_goats.show_icon": "\u663e\u793a\u89d2\u72b6\u7269\u54c1\u56fe\u6807",
+  "config.waila.plugin_marked_goats.show_instrument": "\u663e\u793a\u4e50\u5668\u540d\u79f0",
+  "config.waila.plugin_marked_goats.show_is_screaming": "\u663e\u793a\u5c16\u53eb\u72b6\u6001"
+}

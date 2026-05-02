@@ -1,0 +1,7 @@
+{
+  "marked_goats.screaming_goat": "Cabra cridanera",
+  "config.waila.plugin_marked_goats": "Cabres Marcades",
+  "config.waila.plugin_marked_goats.show_icon": "Mostra l'element de banya com a icona",
+  "config.waila.plugin_marked_goats.show_instrument": "Mostra el nom de l'instrument",
+  "config.waila.plugin_marked_goats.show_is_screaming": "Mostra estat de crida"
+}

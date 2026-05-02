@@ -1,0 +1,7 @@
+{
+  "marked_goats.screaming_goat": "Ch\u00e8vre hurleuse",
+  "config.waila.plugin_marked_goats": "Ch\u00e8vres Marqu\u00e9es",
+  "config.waila.plugin_marked_goats.show_icon": "Afficher l'objet corne comme ic\u00f4ne",
+  "config.waila.plugin_marked_goats.show_instrument": "Afficher le nom de l'instrument",
+  "config.waila.plugin_marked_goats.show_is_screaming": "Afficher l'\u00e9tat du hurlement"
+}

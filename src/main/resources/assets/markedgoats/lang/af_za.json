@@ -1,0 +1,7 @@
+{
+  "marked_goats.screaming_goat": "Skreeubok",
+  "config.waila.plugin_marked_goats": "Gemerkte Bokke",
+  "config.waila.plugin_marked_goats.show_icon": "Wys horingitem as ikoon",
+  "config.waila.plugin_marked_goats.show_instrument": "Wys instrumentnaam",
+  "config.waila.plugin_marked_goats.show_is_screaming": "Wys skreeustatus"
+}

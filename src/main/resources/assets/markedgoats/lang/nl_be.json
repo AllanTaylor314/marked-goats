@@ -1,0 +1,7 @@
+{
+  "marked_goats.screaming_goat": "Schreeuwende geit",
+  "config.waila.plugin_marked_goats": "Gemerkte geiten",
+  "config.waila.plugin_marked_goats.show_icon": "Toon hoornitem als icoon",
+  "config.waila.plugin_marked_goats.show_instrument": "Toon instrumentnaam",
+  "config.waila.plugin_marked_goats.show_is_screaming": "Toon schreeuwstatus"
+}

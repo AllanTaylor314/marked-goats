@@ -1,0 +1,7 @@
+{
+  "marked_goats.screaming_goat": "Capra clamans",
+  "config.waila.plugin_marked_goats": "Caprae Notatae",
+  "config.waila.plugin_marked_goats.show_icon": "Monstra rem cornu sicut iconem",
+  "config.waila.plugin_marked_goats.show_instrument": "Monstra nomen instrumenti",
+  "config.waila.plugin_marked_goats.show_is_screaming": "Monstra statum clamandi"
+}

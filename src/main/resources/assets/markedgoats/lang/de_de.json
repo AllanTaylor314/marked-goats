@@ -1,0 +1,7 @@
+{
+  "marked_goats.screaming_goat": "Schreiziege",
+  "config.waila.plugin_marked_goats": "Markierte Ziegen",
+  "config.waila.plugin_marked_goats.show_icon": "Horn-Gegenstand als Icon anzeigen",
+  "config.waila.plugin_marked_goats.show_instrument": "Instrumentenname anzeigen",
+  "config.waila.plugin_marked_goats.show_is_screaming": "Schreistatus anzeigen"
+}
