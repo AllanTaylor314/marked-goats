@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.13.3'
+    id "net.fabricmc.fabric-loom" version '1.16-SNAPSHOT'
     id 'maven-publish'
 }
 
@@ -24,15 +24,14 @@ repositories {
 dependencies {
     // To change the versions see the gradle.properties file
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings loom.officialMojangMappings() 
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    implementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     // Fabric API. This is technically optional, but you probably want it anyway.
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    modCompileOnly "mcp.mobius.waila:wthit-api:fabric-${wthit_version}"
-    modRuntimeOnly "mcp.mobius.waila:wthit:fabric-${wthit_version}"
-    modRuntimeOnly "lol.bai:badpackets:fabric-${badpackets_version}"
+    compileOnly "mcp.mobius.waila:wthit-api:fabric-${wthit_version}"
+    runtimeOnly "mcp.mobius.waila:wthit:fabric-${wthit_version}"
+    runtimeOnly "lol.bai:badpackets:fabric-${badpackets_version}"
 }
 
 processResources {
@@ -44,7 +43,7 @@ processResources {
     }
 }
 
-def targetJavaVersion = 21
+def targetJavaVersion = 25
 tasks.withType(JavaCompile).configureEach {
     // ensure that the encoding is set to UTF-8, no matter what the system default is
     // this fixes some edge cases with special characters not displaying correctly
@@ -61,7 +60,9 @@ java {
     if (JavaVersion.current() < javaVersion) {
         toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
     }
-    archivesBaseName = project.archives_base_name
+    base {
+        archivesName = project.archives_base_name
+    }
     // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
     // if it is present.
     // If you remove this line, sources will not be generated.
@@ -70,7 +71,7 @@ java {
 
 jar {
     from("LICENSE") {
-        rename { "${it}_${project.archivesBaseName}" }
+        rename { "${it}_${project.archives_base_name}" }
     }
 }
 
