@@ -1,10 +1,5 @@
 package kiwi.allantaylor.markedgoats.mixins;
 
-import net.minecraft.client.render.entity.GoatEntityRenderer;
-import net.minecraft.client.render.entity.state.GoatEntityRenderState;
-import net.minecraft.entity.passive.GoatEntity;
-import net.minecraft.util.Identifier;
-
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -13,36 +8,39 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import kiwi.allantaylor.markedgoats.util.GoatVariantUtil;
-
+import net.minecraft.client.renderer.entity.GoatRenderer;
+import net.minecraft.client.renderer.entity.state.GoatRenderState;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.animal.goat.Goat;
 import java.util.WeakHashMap;
 
-@Mixin(GoatEntityRenderer.class)
+@Mixin(GoatRenderer.class)
 public class GoatMixins {
     // Map to store the association between GoatEntityRenderState and GoatEntity
     @Unique
-    private final WeakHashMap<GoatEntityRenderState, GoatEntity> renderStateToEntityMap = new WeakHashMap<>();
+    private final WeakHashMap<GoatRenderState, Goat> renderStateToEntityMap = new WeakHashMap<>();
 
     /**
      * Capture the association between the GoatEntity and GoatEntityRenderState during updateRenderState.
      */
-    @Inject(method = "updateRenderState(Lnet/minecraft/entity/passive/GoatEntity;Lnet/minecraft/client/render/entity/state/GoatEntityRenderState;F)V",
+    @Inject(method = "extractRenderState(Lnet/minecraft/world/entity/animal/goat/Goat;Lnet/minecraft/client/renderer/entity/state/GoatRenderState;F)V",
             at = @At("HEAD"))
-    public void captureEntityRenderState(GoatEntity goatEntity, GoatEntityRenderState goatEntityRenderState, float f, CallbackInfo ci) {
+    public void captureEntityRenderState(Goat goatEntity, GoatRenderState goatEntityRenderState, float f, CallbackInfo ci) {
         renderStateToEntityMap.put(goatEntityRenderState, goatEntity);
     }
 
     /**
      * Override the texture if the render state corresponds to a screaming goat.
      */
-    @Inject(method = "getTexture(Lnet/minecraft/client/render/entity/state/GoatEntityRenderState;)Lnet/minecraft/util/Identifier;",
+    @Inject(method = "getTextureLocation(Lnet/minecraft/client/renderer/entity/state/GoatRenderState;)Lnet/minecraft/resources/Identifier;",
             at = @At("HEAD"), cancellable = true)
-    public void getTexture(GoatEntityRenderState goatEntityRenderState, CallbackInfoReturnable<Identifier> cir) {
-        GoatEntity goatEntity = renderStateToEntityMap.get(goatEntityRenderState);
+    public void getTexture(GoatRenderState goatEntityRenderState, CallbackInfoReturnable<Identifier> cir) {
+        Goat goatEntity = renderStateToEntityMap.get(goatEntityRenderState);
         if (goatEntity != null) {
             String variety = GoatVariantUtil.getInstrumentNameFromGoat(goatEntity);
             
             if (variety != null) {
-                cir.setReturnValue(Identifier.of("markedgoats", variety + ".png"));
+                cir.setReturnValue(Identifier.fromNamespaceAndPath("markedgoats", variety + ".png"));
             }
         }
     }

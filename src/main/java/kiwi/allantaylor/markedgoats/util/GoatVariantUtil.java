@@ -1,14 +1,13 @@
 package kiwi.allantaylor.markedgoats.util;
 
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.InstrumentTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.animal.goat.Goat;
+import net.minecraft.world.item.Instrument;
 import org.spongepowered.asm.mixin.Unique;
-
-import net.minecraft.entity.passive.GoatEntity;
-import net.minecraft.item.Instrument;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.registry.tag.InstrumentTags;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.util.math.random.Random;
 
 public class GoatVariantUtil {
 
@@ -19,10 +18,10 @@ public class GoatVariantUtil {
      * Converts a goat horn instrument entry to a simple variety string.
      * Example: "minecraft:ponder_goat_horn" -> "ponder"
      */
-    public static String getNameFromInstrument(RegistryEntry<Instrument> instrumentEntry) {
-        return instrumentEntry.getKey()
+    public static String getNameFromInstrument(Holder<Instrument> instrumentEntry) {
+        return instrumentEntry.unwrapKey()
                 .map(key -> {
-                    String path = key.getValue().getPath();
+                    String path = key.identifier().getPath();
                     if (path.endsWith(SUFFIX)) {
                         return path.substring(0, path.length() - SUFFIX.length());
                     }
@@ -31,11 +30,11 @@ public class GoatVariantUtil {
                 .orElse("");
     }
 
-    public static String getInstrumentNameFromGoat(GoatEntity goatEntity) {
-        Random random = Random.create((long) goatEntity.getUuid().hashCode());
-        TagKey<Instrument> tagKey = goatEntity.isScreaming() ? InstrumentTags.SCREAMING_GOAT_HORNS
+    public static String getInstrumentNameFromGoat(Goat goatEntity) {
+        RandomSource random = RandomSource.create((long) goatEntity.getUUID().hashCode());
+        TagKey<Instrument> tagKey = goatEntity.isScreamingGoat() ? InstrumentTags.SCREAMING_GOAT_HORNS
                 : InstrumentTags.REGULAR_GOAT_HORNS;
-        return goatEntity.getEntityWorld().getRegistryManager().getOrThrow(RegistryKeys.INSTRUMENT)
-                .getRandomEntry(tagKey, random).map(GoatVariantUtil::getNameFromInstrument).orElse(null);
+        return goatEntity.level().registryAccess().lookupOrThrow(Registries.INSTRUMENT)
+                .getRandomElementOf(tagKey, random).map(GoatVariantUtil::getNameFromInstrument).orElse(null);
     }
 }

@@ -2,11 +2,11 @@ package kiwi.allantaylor.markedgoats;
 
 import mcp.mobius.waila.api.*;
 import mcp.mobius.waila.api.component.ItemComponent;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.UseCooldownComponent;
-import net.minecraft.entity.passive.GoatEntity;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.animal.goat.Goat;
+import net.minecraft.world.item.component.UseCooldown;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
@@ -15,12 +15,12 @@ import static kiwi.allantaylor.markedgoats.util.GoatVariantUtil.getInstrumentNam
 
 public class MarkedGoatsWailaPlugin implements IWailaCommonPlugin, IWailaClientPlugin, IEntityComponentProvider {
 
-    public static final Identifier SHOW_ICON = Identifier.of("marked_goats:show_icon");
-    public static final Identifier SHOW_INSTRUMENT = Identifier.of("marked_goats:show_instrument");
-    public static final Identifier SHOW_IS_SCREAMING = Identifier.of("marked_goats:show_is_screaming");
+    public static final Identifier SHOW_ICON = Identifier.parse("marked_goats:show_icon");
+    public static final Identifier SHOW_INSTRUMENT = Identifier.parse("marked_goats:show_instrument");
+    public static final Identifier SHOW_IS_SCREAMING = Identifier.parse("marked_goats:show_is_screaming");
 
     // Remove the cooldown overlay from icons
-    public static final UseCooldownComponent FAKE_COOLDOWN = new UseCooldownComponent(0, Optional.of(Identifier.of("marked_goats:fake_horn_cooldown")));
+    public static final UseCooldown FAKE_COOLDOWN = new UseCooldown(0, Optional.of(Identifier.parse("marked_goats:fake_horn_cooldown")));
 
     @Override
     public void register(ICommonRegistrar registrar) {
@@ -31,17 +31,17 @@ public class MarkedGoatsWailaPlugin implements IWailaCommonPlugin, IWailaClientP
 
     @Override
     public void register(IClientRegistrar registrar) {
-        registrar.head(this, GoatEntity.class);
-        registrar.body(this, GoatEntity.class);
-        registrar.icon(this, GoatEntity.class);
+        registrar.head(this, Goat.class);
+        registrar.body(this, Goat.class);
+        registrar.icon(this, Goat.class);
     }
 
     @Override
     public void appendHead(@NotNull ITooltip tooltip, IEntityAccessor accessor, @NotNull IPluginConfig config) {
-        if (accessor.getEntity() instanceof GoatEntity goat && goat.isScreaming() && config.getBoolean(SHOW_IS_SCREAMING)) {
+        if (accessor.getEntity() instanceof Goat goat && goat.isScreamingGoat() && config.getBoolean(SHOW_IS_SCREAMING)) {
             var formatter = IWailaConfig.get().getFormatter();
             var customName = goat.getCustomName();
-            Text fullName = Text.translatable("marked_goats.screaming_goat");
+            Component fullName = Component.translatable("marked_goats.screaming_goat");
 
             if (customName != null) {
                 fullName = customName.copy().append(" (").append(fullName).append(")");
@@ -53,23 +53,23 @@ public class MarkedGoatsWailaPlugin implements IWailaCommonPlugin, IWailaClientP
 
     @Override
     public void appendBody(@NotNull ITooltip tooltip, IEntityAccessor accessor, @NotNull IPluginConfig config) {
-        if (!(accessor.getEntity() instanceof GoatEntity entity)) {
+        if (!(accessor.getEntity() instanceof Goat entity)) {
             return;
         }
         if (config.getBoolean(SHOW_INSTRUMENT)) {
             String instrumentName = getInstrumentNameFromGoat(entity);
-            tooltip.addLine(Text.translatable("instrument.minecraft." + instrumentName + "_goat_horn"));
+            tooltip.addLine(Component.translatable("instrument.minecraft." + instrumentName + "_goat_horn"));
         }
     }
 
     @Override
     public ITooltipComponent getIcon(IEntityAccessor accessor, @NotNull IPluginConfig config) {
-        if (!(accessor.getEntity() instanceof GoatEntity entity)) {
+        if (!(accessor.getEntity() instanceof Goat entity)) {
             return null;
         }
         if (config.getBoolean(SHOW_ICON)) {
-            var stack = entity.getGoatHornStack();
-            stack.set(DataComponentTypes.USE_COOLDOWN, FAKE_COOLDOWN);
+            var stack = entity.createHorn();
+            stack.set(DataComponents.USE_COOLDOWN, FAKE_COOLDOWN);
             return new ItemComponent(stack);
         }
         return null;
