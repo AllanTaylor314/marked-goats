@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import kiwi.allantaylor.markedgoats.util.GoatVariantUtil;
+import kiwi.allantaylor.markedgoats.util.VersionChecker;
 import net.minecraft.client.renderer.entity.GoatRenderer;
 import net.minecraft.client.renderer.entity.state.GoatRenderState;
 import net.minecraft.resources.Identifier;
@@ -40,7 +41,11 @@ public class GoatMixins {
             String variety = GoatVariantUtil.getInstrumentNameFromGoat(goatEntity);
             
             if (variety != null) {
-                cir.setReturnValue(Identifier.fromNamespaceAndPath("markedgoats", variety + ".png"));
+                if (goatEntity.isBaby() && VersionChecker.isPostTinyTakeover()) {
+                    cir.setReturnValue(Identifier.fromNamespaceAndPath("markedgoats", variety + "_baby.png"));
+                } else {
+                    cir.setReturnValue(Identifier.fromNamespaceAndPath("markedgoats", variety + ".png"));
+                }
             }
         }
     }
