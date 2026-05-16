@@ -1,10 +1,7 @@
 package kiwi.allantaylor.markedgoats.util;
 
 import net.minecraft.core.Holder;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.tags.InstrumentTags;
-import net.minecraft.tags.TagKey;
-import net.minecraft.util.RandomSource;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.animal.goat.Goat;
 import net.minecraft.world.item.Instrument;
 import org.spongepowered.asm.mixin.Unique;
@@ -31,10 +28,6 @@ public class GoatVariantUtil {
     }
 
     public static String getInstrumentNameFromGoat(Goat goatEntity) {
-        RandomSource random = RandomSource.create((long) goatEntity.getUUID().hashCode());
-        TagKey<Instrument> tagKey = goatEntity.isScreamingGoat() ? InstrumentTags.SCREAMING_GOAT_HORNS
-                : InstrumentTags.REGULAR_GOAT_HORNS;
-        return goatEntity.level().registryAccess().lookupOrThrow(Registries.INSTRUMENT)
-                .getRandomElementOf(tagKey, random).map(GoatVariantUtil::getNameFromInstrument).orElse(null);
+        return getNameFromInstrument(goatEntity.createHorn().get(DataComponents.INSTRUMENT).instrument());
     }
 }
