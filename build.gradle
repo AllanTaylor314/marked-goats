@@ -1,5 +1,5 @@
 plugins {
-    id "net.fabricmc.fabric-loom" version '1.16-SNAPSHOT'
+    id "net.fabricmc.fabric-loom" version '1.17-SNAPSHOT'
     id 'maven-publish'
 }
 
@@ -29,9 +29,10 @@ dependencies {
     // Fabric API. This is technically optional, but you probably want it anyway.
     implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    compileOnly "mcp.mobius.waila:wthit-api:fabric-${wthit_version}"
-    runtimeOnly "mcp.mobius.waila:wthit:fabric-${wthit_version}"
-    runtimeOnly "lol.bai:badpackets:fabric-${badpackets_version}"
+    // Awaiting 26.2 release
+    // compileOnly "mcp.mobius.waila:wthit-api:fabric-${wthit_version}"
+    // runtimeOnly "mcp.mobius.waila:wthit:fabric-${wthit_version}"
+    // runtimeOnly "lol.bai:badpackets:fabric-${badpackets_version}"
 }
 
 processResources {
