@@ -1,6 +1,6 @@
-package com.example.modtemplate.event;
+package kiwi.allantaylor.markedgoats.event;
 
-import com.example.modtemplate.ModTemplate;
+import kiwi.allantaylor.markedgoats.ModTemplate;
 import net.minecraft.server.level.ServerPlayer;
 
 import java.util.Objects;

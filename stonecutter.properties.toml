@@ -1,26 +1,22 @@
-mod.id = "modtemplate"
-mod.name = "Mod Template"
-mod.group = "com.example"
-mod.version = "0.1.0"
-mod.channel_tag = "-alpha.2"
-mod.description = "Example Description"
-mod.authors = ["AuthorName", "AnotherAuthorName"]
-mod.contributors = ["ContributorName", "AnotherContributorName"]
-mod.inception_year = "2025"
+mod.id = "markedgoats"
+mod.name = "Marked Goats"
+mod.group = "kiwi.allantaylor"
+mod.version = "2.0.0"
+mod.channel_tag = "-alpha.0"
+mod.description = "Different textures for 8 different goats"
+mod.authors = ["AllanTaylor314"]
+mod.contributors = []
+mod.inception_year = "2026"
 mod.license.name = "MIT"
-mod.license.url = "https://opensource.org/licenses/MIT"
+mod.license.url = "https://github.com/AllanTaylor314/marked-goats/blob/main/LICENSE"
 mod.license.dist = "repo"
-mod.sources_url = "https://github.com/rotgruengelb/stonecutter-mod-template"
-mod.homepage_url = "https://github.com/rotgruengelb/stonecutter-mod-template"
-mod.issues_url = "https://github.com/rotgruengelb/stonecutter-mod-template/issues"
-mod.discord_url = "https://discord.gg/aunYJB4wz9"
+mod.sources_url = "https://github.com/AllanTaylor314/marked-goats"
+mod.homepage_url = "https://modrinth.com/project/biTPC5IL"
+mod.issues_url = "https://github.com/AllanTaylor314/marked-goats/issues"
+mod.discord_url = ""
 [[mod.pom.developers]]
-id = "authorname"
-name = "AuthorName"
-url = "https://github.com/ghost"
-[[mod.pom.developers]]
-id = "anotherauthorname"
-name = "AnotherAuthorName"
+id = "AllanTaylor314"
+name = "Allan Taylor"
 url = "https://github.com/ghost"
 
 [fabric]

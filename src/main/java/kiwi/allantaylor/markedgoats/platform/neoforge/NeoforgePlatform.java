@@ -1,8 +1,8 @@
-package com.example.modtemplate.platform.neoforge;
+package kiwi.allantaylor.markedgoats.platform.neoforge;
 
 //? neoforge {
 
-/*import com.example.modtemplate.platform.Platform;
+/*import kiwi.allantaylor.markedgoats.platform.Platform;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLLoader;
 import net.neoforged.fml.loading.VersionInfo;

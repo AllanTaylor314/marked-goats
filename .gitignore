@@ -47,7 +47,7 @@ bin/
 .DS_Store
 
 ### Jetbrains ###
-.idea/
+.idea/**/*
 !.idea/icon.png
 !.idea/externalDependencies.xml
 !.idea/icon.svg

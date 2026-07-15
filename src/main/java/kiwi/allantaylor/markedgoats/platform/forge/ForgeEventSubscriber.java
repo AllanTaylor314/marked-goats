@@ -1,8 +1,8 @@
-package com.example.modtemplate.platform.forge;
+package kiwi.allantaylor.markedgoats.platform.forge;
 
 //? forge {
 
-/*import com.example.modtemplate.event.ExampleEventHandler; // sample_content
+/*import kiwi.allantaylor.markedgoats.event.ExampleEventHandler; // sample_content
 import net.minecraft.server.level.ServerPlayer; // sample_content
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

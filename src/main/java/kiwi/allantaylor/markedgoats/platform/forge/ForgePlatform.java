@@ -1,8 +1,8 @@
-package com.example.modtemplate.platform.forge;
+package kiwi.allantaylor.markedgoats.platform.forge;
 
 //? forge {
 
-/*import com.example.modtemplate.platform.Platform;
+/*import kiwi.allantaylor.markedgoats.platform.Platform;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.FMLLoader;
 

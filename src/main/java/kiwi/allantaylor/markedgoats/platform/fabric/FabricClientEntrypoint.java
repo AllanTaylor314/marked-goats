@@ -1,8 +1,8 @@
-package com.example.modtemplate.platform.fabric;
+package kiwi.allantaylor.markedgoats.platform.fabric;
 
 //? fabric {
 
-import com.example.modtemplate.ModTemplate;
+import kiwi.allantaylor.markedgoats.ModTemplate;
 import dev.kikugie.fletching_table.annotation.fabric.Entrypoint;
 import net.fabricmc.api.ClientModInitializer;
 

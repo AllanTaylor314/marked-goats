@@ -1,8 +1,8 @@
-package com.example.modtemplate.platform.fabric.datagen;
+package kiwi.allantaylor.markedgoats.platform.fabric.datagen;
 
 //? fabric && != 1.19.2 {
 
-import com.example.modtemplate.ModTemplate;
+import kiwi.allantaylor.markedgoats.ModTemplate;
 
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.core.HolderLookup;

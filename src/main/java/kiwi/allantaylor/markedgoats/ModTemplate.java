@@ -1,17 +1,17 @@
-package com.example.modtemplate;
+package kiwi.allantaylor.markedgoats;
 
-import com.example.modtemplate.platform.Platform;
+import kiwi.allantaylor.markedgoats.platform.Platform;
 
 import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 //? fabric {
-import com.example.modtemplate.platform.fabric.FabricPlatform;
+import kiwi.allantaylor.markedgoats.platform.fabric.FabricPlatform;
 //?} neoforge {
-/*import com.example.modtemplate.platform.neoforge.NeoforgePlatform;
+/*import kiwi.allantaylor.markedgoats.platform.neoforge.NeoforgePlatform;
  *///?} forge {
-/*import com.example.modtemplate.platform.forge.ForgePlatform;
+/*import kiwi.allantaylor.markedgoats.platform.forge.ForgePlatform;
  *///?}
 
 @SuppressWarnings("LoggingSimilarMessage")

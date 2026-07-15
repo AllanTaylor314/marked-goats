@@ -1,4 +1,4 @@
-package com.example.modtemplate.platform;
+package kiwi.allantaylor.markedgoats.platform;
 
 public interface Platform {
 	boolean isModLoaded(String modId);

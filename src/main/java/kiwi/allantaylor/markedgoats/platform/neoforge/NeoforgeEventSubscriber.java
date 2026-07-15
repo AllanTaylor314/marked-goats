@@ -1,8 +1,8 @@
-package com.example.modtemplate.platform.neoforge;
+package kiwi.allantaylor.markedgoats.platform.neoforge;
 
 //? neoforge {
 
-/*import com.example.modtemplate.event.ExampleEventHandler; // sample_content
+/*import kiwi.allantaylor.markedgoats.event.ExampleEventHandler; // sample_content
 import net.minecraft.server.level.ServerPlayer; // sample_content
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;

@@ -1,8 +1,8 @@
-package com.example.modtemplate.platform.neoforge;
+package kiwi.allantaylor.markedgoats.platform.neoforge;
 
 //? neoforge {
 
-/*import com.example.modtemplate.ModTemplate;
+/*import kiwi.allantaylor.markedgoats.ModTemplate;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;

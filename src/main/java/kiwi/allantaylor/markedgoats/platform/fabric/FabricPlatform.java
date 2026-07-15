@@ -1,8 +1,8 @@
-package com.example.modtemplate.platform.fabric;
+package kiwi.allantaylor.markedgoats.platform.fabric;
 
 //? fabric {
 
-import com.example.modtemplate.platform.Platform;
+import kiwi.allantaylor.markedgoats.platform.Platform;
 import net.fabricmc.loader.api.FabricLoader;
 
 public class FabricPlatform implements Platform {

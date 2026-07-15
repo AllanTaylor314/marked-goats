@@ -1,8 +1,8 @@
-package com.example.modtemplate.platform.forge;
+package kiwi.allantaylor.markedgoats.platform.forge;
 
 //? forge {
 
-/*import com.example.modtemplate.ModTemplate;
+/*import kiwi.allantaylor.markedgoats.ModTemplate;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
