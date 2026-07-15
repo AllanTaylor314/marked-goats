@@ -1,0 +1,7 @@
+{
+  "marked_goats.screaming_goat": "Kryklivaja kaza",
+  "config.waila.plugin_marked_goats": "Pa zna\u010danyja kozy",
+  "config.waila.plugin_marked_goats.show_icon": "Pakazva\u0107 pradmiet roha jak zna\u010dok",
+  "config.waila.plugin_marked_goats.show_instrument": "Pakazva\u0107 nazvu instrumienta",
+  "config.waila.plugin_marked_goats.show_is_screaming": "Pakazva\u0107 status kryku"
+}

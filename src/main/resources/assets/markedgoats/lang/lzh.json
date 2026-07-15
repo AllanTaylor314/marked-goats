@@ -1,0 +1,7 @@
+{
+  "marked_goats.screaming_goat": "\u9cf4\u5c71\u7f8a",
+  "config.waila.plugin_marked_goats": "\u6a19\u8a18\u5c71\u7f8a",
+  "config.waila.plugin_marked_goats.show_icon": "\u793a\u89d2\u5668\u5716\u6a19",
+  "config.waila.plugin_marked_goats.show_instrument": "\u793a\u6a02\u5668\u540d",
+  "config.waila.plugin_marked_goats.show_is_screaming": "\u793a\u9cf4\u53eb\u72c0\u614b"
+}

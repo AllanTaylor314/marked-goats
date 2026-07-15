@@ -1,0 +1,7 @@
+{
+  "marked_goats.screaming_goat": "Kambing Menjerit",
+  "config.waila.plugin_marked_goats": "Kambing Ditandai",
+  "config.waila.plugin_marked_goats.show_icon": "Tampilkan item tanduk sebagai ikon",
+  "config.waila.plugin_marked_goats.show_instrument": "Tampilkan nama instrumen",
+  "config.waila.plugin_marked_goats.show_is_screaming": "Tampilkan status berteriak"
+}

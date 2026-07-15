@@ -1,0 +1,7 @@
+{
+  "marked_goats.screaming_goat": "\u53eb\u3076\u30e4\u30ae",
+  "config.waila.plugin_marked_goats": "\u30de\u30fc\u30af\u3055\u308c\u305f\u30e4\u30ae",
+  "config.waila.plugin_marked_goats.show_icon": "\u89d2\u30a2\u30a4\u30c6\u30e0\u3092\u30a2\u30a4\u30b3\u30f3\u3068\u3057\u3066\u8868\u793a",
+  "config.waila.plugin_marked_goats.show_instrument": "\u697d\u5668\u540d\u3092\u8868\u793a",
+  "config.waila.plugin_marked_goats.show_is_screaming": "\u53eb\u3073\u306e\u30b9\u30c6\u30fc\u30bf\u30b9\u3092\u8868\u793a"
+}

@@ -1,0 +1,7 @@
+{
+  "marked_goats.screaming_goat": "Skrikande get",
+  "config.waila.plugin_marked_goats": "Markerade getter",
+  "config.waila.plugin_marked_goats.show_icon": "Visa hornobjekt som ikon",
+  "config.waila.plugin_marked_goats.show_instrument": "Visa instrumentnamn",
+  "config.waila.plugin_marked_goats.show_is_screaming": "Visa skrikstatus"
+}

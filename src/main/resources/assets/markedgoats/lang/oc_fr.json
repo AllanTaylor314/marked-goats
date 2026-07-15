@@ -1,0 +1,7 @@
+{
+  "marked_goats.screaming_goat": "Cabra cridaira",
+  "config.waila.plugin_marked_goats": "Cabras Marcadas",
+  "config.waila.plugin_marked_goats.show_icon": "Afichar obj\u00e8cte c\u00f2rna coma ic\u00f2na",
+  "config.waila.plugin_marked_goats.show_instrument": "Afichar nom de l'instrument",
+  "config.waila.plugin_marked_goats.show_is_screaming": "Afichar estat de cridaira"
+}

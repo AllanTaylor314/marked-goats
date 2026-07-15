@@ -1,0 +1,7 @@
+{
+  "marked_goats.screaming_goat": "Wrzeszcz\u0105ca koza",
+  "config.waila.plugin_marked_goats": "Oznaczone kozy",
+  "config.waila.plugin_marked_goats.show_icon": "Poka\u017c przedmiot rogu jako ikon\u0119",
+  "config.waila.plugin_marked_goats.show_instrument": "Poka\u017c nazw\u0119 instrumentu",
+  "config.waila.plugin_marked_goats.show_is_screaming": "Poka\u017c status wrzeszczenia"
+}

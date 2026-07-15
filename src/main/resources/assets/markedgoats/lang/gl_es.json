@@ -1,0 +1,7 @@
+{
+  "marked_goats.screaming_goat": "Cabra berrona",
+  "config.waila.plugin_marked_goats": "Cabras Marcadas",
+  "config.waila.plugin_marked_goats.show_icon": "Amosar obxecto de corno como icona",
+  "config.waila.plugin_marked_goats.show_instrument": "Amosar nome do instrumento",
+  "config.waila.plugin_marked_goats.show_is_screaming": "Amosar estado de berro"
+}
