@@ -29,10 +29,9 @@ dependencies {
     // Fabric API. This is technically optional, but you probably want it anyway.
     implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    // Awaiting 26.2 release
-    // compileOnly "mcp.mobius.waila:wthit-api:fabric-${wthit_version}"
-    // runtimeOnly "mcp.mobius.waila:wthit:fabric-${wthit_version}"
-    // runtimeOnly "lol.bai:badpackets:fabric-${badpackets_version}"
+    compileOnly "mcp.mobius.waila:wthit-api:fabric-${wthit_version}"
+    runtimeOnly "mcp.mobius.waila:wthit:fabric-${wthit_version}"
+    runtimeOnly "lol.bai:badpackets:fabric-${badpackets_version}"
 }
 
 processResources {
