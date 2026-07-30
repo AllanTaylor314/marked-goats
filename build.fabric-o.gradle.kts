@@ -63,6 +63,13 @@ repositories {
 	mavenCentral()
 	strictMaven("https://maven.terraformersmc.com/", "com.terraformersmc") { name = "TerraformersMC" }
 	strictMaven("https://api.modrinth.com/maven", "maven.modrinth") { name = "Modrinth" }
+	maven {
+		url = uri("https://maven2.bai.lol")
+		content {
+			includeGroup("lol.bai")
+			includeGroup("mcp.mobius.waila")
+		}
+	}
 }
 
 configurations.all {
@@ -83,4 +90,9 @@ dependencies {
 	// include(libs.moulberry.mixinconstraints)
 	modImplementation("net.fabricmc.fabric-api:fabric-api:${prop("deps.fabric-api")}")
 	modLocalRuntime("com.terraformersmc:modmenu:${prop("deps.modmenu")}")
+	if (project.hasProperty("deps.wthit")) {
+		modCompileOnly("mcp.mobius.waila:wthit-api:fabric-${prop("deps.wthit")}")
+		modRuntimeOnly("mcp.mobius.waila:wthit:fabric-${prop("deps.wthit")}")
+		modRuntimeOnly("lol.bai:badpackets:fabric-${prop("deps.badpackets")}")
+	}
 }

@@ -1,5 +1,5 @@
 package kiwi.allantaylor.markedgoats;
-//? if wthit_plugin {
+//? if wthit_plugin && >=1.20 {
 /*import mcp.mobius.waila.api.*;
 import mcp.mobius.waila.api.component.ItemComponent;
 import net.minecraft.core.component.DataComponents;
@@ -72,6 +72,64 @@ public class MarkedGoatsWailaPlugin implements IWailaCommonPlugin, IWailaClientP
             stack.set(DataComponents.USE_COOLDOWN, FAKE_COOLDOWN);
             return new ItemComponent(stack);
         }
+        return null;
+    }
+}
+*///?}
+//? if wthit_plugin && <1.20 {
+/*import mcp.mobius.waila.api.*;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.animal.goat.Goat;
+import org.jetbrains.annotations.NotNull;
+
+import static kiwi.allantaylor.markedgoats.util.GoatVariantUtil.getInstrumentNameFromGoat;
+
+public class MarkedGoatsWailaPlugin implements IWailaCommonPlugin, IWailaClientPlugin, IEntityComponentProvider {
+
+    public static final ResourceLocation SHOW_INSTRUMENT = new ResourceLocation("marked_goats", "show_instrument");
+    public static final ResourceLocation SHOW_IS_SCREAMING = new ResourceLocation("marked_goats", "show_is_screaming");
+
+    @Override
+    public void register(ICommonRegistrar registrar) {
+        registrar.localConfig(SHOW_INSTRUMENT, true);
+        registrar.localConfig(SHOW_IS_SCREAMING, true);
+    }
+
+    @Override
+    public void register(IClientRegistrar registrar) {
+        registrar.head(this, Goat.class);
+        registrar.body(this, Goat.class);
+    }
+
+    @Override
+    public void appendHead(@NotNull ITooltip tooltip, IEntityAccessor accessor, @NotNull IPluginConfig config) {
+        if (accessor.getEntity() instanceof Goat goat && goat.isScreamingGoat() && config.getBoolean(SHOW_IS_SCREAMING)) {
+            var formatter = IWailaConfig.get().getFormatter();
+            var customName = goat.getCustomName();
+            Component fullName = Component.translatable("marked_goats.screaming_goat");
+
+            if (customName != null) {
+                fullName = customName.copy().append(" (").append(fullName).append(")");
+            }
+
+            tooltip.setLine(WailaConstants.OBJECT_NAME_TAG, formatter.entityName(fullName));
+        }
+    }
+
+    @Override
+    public void appendBody(@NotNull ITooltip tooltip, IEntityAccessor accessor, @NotNull IPluginConfig config) {
+        if (!(accessor.getEntity() instanceof Goat entity)) {
+            return;
+        }
+        if (config.getBoolean(SHOW_INSTRUMENT)) {
+            String instrumentName = getInstrumentNameFromGoat(entity);
+            tooltip.addLine(Component.translatable("instrument.minecraft." + instrumentName + "_goat_horn"));
+        }
+    }
+
+    @Override
+    public ITooltipComponent getIcon(IEntityAccessor accessor, @NotNull IPluginConfig config) {
         return null;
     }
 }
