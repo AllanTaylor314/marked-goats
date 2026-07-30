@@ -1,0 +1,9 @@
+{
+  "markedgoats:plugin": {
+    "entrypoints": {
+      "common": "kiwi.allantaylor.markedgoats.MarkedGoatsWailaPlugin",
+      "client": "kiwi.allantaylor.markedgoats.MarkedGoatsWailaPlugin"
+    },
+    "side": "client"
+  }
+}

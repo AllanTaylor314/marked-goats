@@ -1,5 +1,8 @@
 @file:OptIn(dev.kikugie.stonecutter.StonecutterExperimentalAPI::class)
 
+import kotlin.collections.set
+
+
 plugins {
 	alias(libs.plugins.stonecutter)
 	alias(libs.plugins.dotenv)
@@ -29,6 +32,7 @@ tasks.register("runActiveServer") {
 }
 
 stonecutter parameters {
+	val (version, loader) = current.project.split('-', limit = 2)
 	constants.match(current.project.substringAfterLast('-'), "fabric", "neoforge", "forge")
 	swaps["mod_version"] = "\"${properties.get<String>("mod.version")}\";"
 	swaps["mod_id"] = "\"${properties.get<String>("mod.id")}\";"
@@ -36,6 +40,7 @@ stonecutter parameters {
 	swaps["mod_group"] = "\"${properties.get<String>("mod.group")}\";"
 	swaps["minecraft"] = "\"${current.version}\";"
 	constants["release"] = properties.get<String>("mod.id") != "modtemplate"
+	constants["wthit_plugin"] = findProperty("$loader.$version.deps.wthit") != null
 }
 
 for (version in stonecutter.versions.map { it.version }.distinct()) tasks.register("publish$version") {
