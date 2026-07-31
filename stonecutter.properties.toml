@@ -38,11 +38,15 @@ deps.badpackets = "0.2.3"
 deps.minecraft = "1.21.1"
 deps.fabric-api = "0.116.7+1.21.1"
 deps.modmenu = "15.0.0"
+deps.wthit = "12.10.2"
+deps.badpackets = "0.8.2"
 
 [fabric."1.21.7"]
 deps.minecraft = "1.21.7"
 deps.fabric-api = "0.128.1+1.21.7"
 deps.modmenu = "15.0.0"
+deps.wthit = "16.0.4"
+deps.badpackets = "0.9.0"
 publish.additionalVersions = ["1.21.6"]
 
 [fabric."26.1.2"]
