@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.entity.GoatRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.animal.goat.Goat;
 
-//? if >=1.20.5 {
+//? if >=1.21.2 {
 /*import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import net.minecraft.client.renderer.entity.state.GoatRenderState;
@@ -19,14 +19,23 @@ import java.util.WeakHashMap;
 
 @Mixin(GoatRenderer.class)
 public class GoatMixins {
-	//? if <1.20.5 {
+	//? if <1.20 {
 	/*@Inject(method = "getTextureLocation(Lnet/minecraft/world/entity/animal/goat/Goat;)Lnet/minecraft/resources/ResourceLocation;",
 			at = @At("HEAD"), cancellable = true)
 	public void getTexture(Goat goatEntity, CallbackInfoReturnable<ResourceLocation> cir) {
 		String variety = GoatVariantUtil.getInstrumentNameFromGoat(goatEntity);
 		cir.setReturnValue(new ResourceLocation("markedgoats", variety + ".png"));
 	}
-	*///?} else {
+	*///?}
+	//? if >=1.20 && <1.21.2 {
+	/*@Inject(method = "getTextureLocation(Lnet/minecraft/world/entity/animal/goat/Goat;)Lnet/minecraft/resources/ResourceLocation;",
+			at = @At("HEAD"), cancellable = true)
+	public void getTexture(Goat goatEntity, CallbackInfoReturnable<ResourceLocation> cir) {
+		String variety = GoatVariantUtil.getInstrumentNameFromGoat(goatEntity);
+		cir.setReturnValue(ResourceLocation.fromNamespaceAndPath("markedgoats", variety + ".png"));
+	}
+	*///?}
+	//? if >=1.21.2 {
     // Map to store the association between GoatEntityRenderState and GoatEntity
     @Unique
     private final WeakHashMap<GoatRenderState, Goat> renderStateToEntityMap = new WeakHashMap<>();
