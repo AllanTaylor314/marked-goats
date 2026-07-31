@@ -3,12 +3,12 @@ package kiwi.allantaylor.markedgoats.util;
 import net.minecraft.world.entity.animal.goat.Goat;
 import org.spongepowered.asm.mixin.Unique;
 
-//? if >=1.20.5 && <1.21.2 {
+//? if >=1.20.5 && <1.21.5 {
 /*import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.Instrument;
 *///?}
-//? if >=1.21.2 && <26.1-snapshot-3 {
+//? if >=1.21.5 && <26.1-snapshot-3 {
 /*import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.EitherHolder;
@@ -36,7 +36,7 @@ public class GoatVariantUtil {
 		return pool[new java.util.Random(goatEntity.getUUID().hashCode()).nextInt(pool.length)];
 	}
 	*///?}
-	//? if >=1.20.5 && <1.21.2 {
+	//? if >=1.20.5 && <1.21.5 {
 	/*// DataComponents.INSTRUMENT is a plain Holder<Instrument> here - the
 	// InstrumentComponent wrapper (and its .instrument() accessor) doesn't
 	// exist yet, so there's nothing to unwrap first.
@@ -53,7 +53,7 @@ public class GoatVariantUtil {
                 .orElse("");
 	}
 	*///?}
-	//? if >=1.21.2 {
+	//? if >=1.21.5 {
     /**
      * Converts a goat horn instrument entry to a simple variety string.
      * Example: "minecraft:ponder_goat_horn" -> "ponder"

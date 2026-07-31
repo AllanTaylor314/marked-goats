@@ -27,6 +27,22 @@ deps.minecraft = "1.17.1"
 deps.fabric-api = "0.46.1+1.17"
 deps.modmenu = "2.0.17"
 
+[fabric."1.18.1"]
+deps.minecraft = "1.18.1"
+deps.minecraft-range = ">=1.18 <1.18.2"
+deps.fabric-api = "0.46.6+1.18"
+deps.modmenu = "3.0.1"
+publish.additionalVersions = ["1.18"]
+# No WTHIT: badpackets has zero published versions this far back
+# (confirmed via narrow per-version Modrinth query, not just a bulk-query
+# absence - see SESSION-HANDOFF.md for the bulk-query reliability caveat).
+
+[fabric."1.18.2"]
+deps.minecraft = "1.18.2"
+deps.fabric-api = "0.77.0+1.18.2"
+deps.modmenu = "3.2.5"
+# No WTHIT: same reason as 1.18.1 above.
+
 [fabric."1.19.2"]
 deps.minecraft = "1.19.2"
 deps.minecraft-range = ">=1.19 <1.19.3"
@@ -78,6 +94,56 @@ deps.modmenu = "9.0.0"
 deps.wthit = "10.11.1"
 deps.badpackets = "0.6.2"
 publish.additionalVersions = ["1.20.3"]
+
+[fabric."1.21.11"]
+deps.minecraft = "1.21.11"
+deps.fabric-api = "0.141.6+1.21.11"
+deps.modmenu = "17.0.0"
+deps.wthit = "18.2.2"
+deps.badpackets = "0.11.2"
+
+[fabric."1.21.10"]
+deps.minecraft = "1.21.10"
+deps.minecraft-range = ">=1.21.9 <1.21.11"
+deps.fabric-api = "0.138.4+1.21.10"
+deps.modmenu = "16.0.1"
+deps.wthit = "17.5.2"
+deps.badpackets = "0.10.2"
+publish.additionalVersions = ["1.21.9"]
+
+[fabric."1.21.5"]
+deps.minecraft = "1.21.5"
+deps.fabric-api = "0.128.2+1.21.5"
+deps.modmenu = "14.0.2"
+deps.wthit = "15.0.3"
+deps.badpackets = "0.8.2"
+
+[fabric."1.21.4"]
+deps.minecraft = "1.21.4"
+deps.fabric-api = "0.119.4+1.21.4"
+deps.modmenu = "13.0.4"
+deps.wthit = "14.6.2"
+deps.badpackets = "0.8.2"
+
+[fabric."1.21.3"]
+deps.minecraft = "1.21.3"
+deps.minecraft-range = ">=1.21.2 <1.21.4"
+deps.fabric-api = "0.114.1+1.21.3"
+deps.modmenu = "12.0.1"
+deps.wthit = "13.1.1"
+deps.wthit-api = "13.0.0"
+deps.badpackets = "0.8.2"
+publish.additionalVersions = ["1.21.2"]
+
+[fabric."1.20.6"]
+deps.minecraft = "1.20.6"
+deps.minecraft-range = ">=1.20.5 <1.20.7"
+deps.fabric-api = "0.100.8+1.20.6"
+deps.modmenu = "10.0.0"
+publish.additionalVersions = ["1.20.5"]
+# No WTHIT: fabric-11.4.3 (this block's release) confirmed to only have
+# the old unified IWailaPlugin interface, same incompatible generation as
+# the 9.x line - see the note in stonecutter.properties.toml for 1.20.2.
 
 [fabric."1.21.1"]
 deps.minecraft = "1.21.1"
