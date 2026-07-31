@@ -29,6 +29,8 @@ sealed class Loader(val id: String) {
 		)
 
 		override fun generateManifest(ctx: Context): String {
+			val awFile = ctx.project.file("src/main/resources/aw/${ctx.currentMcVersion}.accesswidener")
+
 			val manifest = FabricManifest(
 				id = ctx.modId,
 				name = ctx.modName,
@@ -50,7 +52,7 @@ sealed class Loader(val id: String) {
 				description = ctx.description,
 				icon = "assets/icon.png",
 				license = ctx.licenseName,
-				accessWidener = "aw/${ctx.currentMcVersion}.accesswidener",
+				accessWidener = "aw/${ctx.currentMcVersion}.accesswidener".takeIf { awFile.exists() },
 				entrypoints = mapOf(
 //					"main" to listOf("${ctx.modGroup}.${ctx.modId}.platform.fabric.FabricEntrypoint"),
 //					"client" to listOf("${ctx.modGroup}.${ctx.modId}.platform.fabric.FabricClientEntrypoint"),
