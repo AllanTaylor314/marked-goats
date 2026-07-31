@@ -11,11 +11,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.animal.goat.Goat;
 
 //? if >=1.21.2 {
-/*import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import net.minecraft.client.renderer.entity.state.GoatRenderState;
 import java.util.WeakHashMap;
-*///?}
+//?}
 
 @Mixin(GoatRenderer.class)
 public class GoatMixins {

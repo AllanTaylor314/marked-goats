@@ -1,6 +1,6 @@
 package kiwi.allantaylor.markedgoats;
 //? if wthit_plugin && >=1.21.2 {
-/*import mcp.mobius.waila.api.*;
+import mcp.mobius.waila.api.*;
 import mcp.mobius.waila.api.component.ItemComponent;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -75,7 +75,7 @@ public class MarkedGoatsWailaPlugin implements IWailaCommonPlugin, IWailaClientP
         return null;
     }
 }
-*///?}
+//?}
 //? if wthit_plugin && >=1.21 && <1.21.2 {
 /*import mcp.mobius.waila.api.*;
 import mcp.mobius.waila.api.component.ItemComponent;

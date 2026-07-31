@@ -9,11 +9,11 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.Instrument;
 *///?}
 //? if >=1.21.5 && <26.1-snapshot-3 {
-/*import net.minecraft.core.Holder;
+import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.EitherHolder;
 import net.minecraft.world.item.Instrument;
-*///?}
+//?}
 //? if >=26.1-snapshot-3 {
 /*import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
