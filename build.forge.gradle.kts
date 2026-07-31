@@ -30,9 +30,12 @@ legacyForge {
 
 	validateAccessTransformers = true
 
-	accessTransformers.from(
-		rootProject.file("src/main/resources/aw/${sc.current.version}.cfg")
-	)
+	val atFile = rootProject.file("src/main/resources/aw/${sc.current.version}.cfg")
+	if (atFile.exists()) {
+		accessTransformers.from(atFile)
+	} else {
+		accessTransformers.from()
+	}
 
 	runs {
 		register("client") {

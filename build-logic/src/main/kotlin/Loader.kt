@@ -108,6 +108,8 @@ sealed class Loader(val id: String) {
 			addDeps(ctx.extension.dependencies.optional, "optional")
 			addDeps(ctx.extension.dependencies.incompatible, "incompatible")
 
+			val atFile = ctx.project.file("src/main/resources/aw/${ctx.stonecutter.current.version}.cfg")
+
 			val manifest = ForgeManifest(
 				license = ctx.licenseName,
 				issueTrackerURL = ctx.issuesUrl,
@@ -126,7 +128,11 @@ sealed class Loader(val id: String) {
 				),
 				dependencies = mapOf(ctx.modId to forgeDeps),
 				mixins = listOf(ForgeMixin("${ctx.modId}.mixins.json")),
-				accessTransformers = listOf(ForgeAccessTransformer("aw/${ctx.stonecutter.current.version}.cfg"))
+				accessTransformers = if (atFile.exists()) {
+					listOf(ForgeAccessTransformer("aw/${ctx.stonecutter.current.version}.cfg"))
+				} else {
+					emptyList()
+				}
 			)
 
 			return TOML.encodeToString(manifest)
