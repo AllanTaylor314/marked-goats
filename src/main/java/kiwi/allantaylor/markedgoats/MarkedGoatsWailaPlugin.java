@@ -76,7 +76,7 @@ public class MarkedGoatsWailaPlugin implements IWailaCommonPlugin, IWailaClientP
     }
 }
 *///?}
-//? if wthit_plugin && >=1.20 && <1.21.2 {
+//? if wthit_plugin && >=1.21 && <1.21.2 {
 /*import mcp.mobius.waila.api.*;
 import mcp.mobius.waila.api.component.ItemComponent;
 import net.minecraft.network.chat.Component;
@@ -147,7 +147,7 @@ public class MarkedGoatsWailaPlugin implements IWailaCommonPlugin, IWailaClientP
     }
 }
 *///?}
-//? if wthit_plugin && <1.20 {
+//? if wthit_plugin && <1.21 {
 /*import mcp.mobius.waila.api.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;

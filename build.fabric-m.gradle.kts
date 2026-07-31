@@ -82,7 +82,8 @@ dependencies {
 	implementation("net.fabricmc.fabric-api:fabric-api:${prop("deps.fabric-api")}")
 	localRuntime("com.terraformersmc:modmenu:${prop("deps.modmenu")}")
 	if (project.hasProperty("deps.wthit")) {
-		compileOnly("mcp.mobius.waila:wthit-api:fabric-${prop("deps.wthit")}")
+		val wthitApiVersion = if (project.hasProperty("deps.wthit-api")) prop("deps.wthit-api") else prop("deps.wthit")
+		compileOnly("mcp.mobius.waila:wthit-api:fabric-$wthitApiVersion")
 		runtimeOnly("mcp.mobius.waila:wthit:fabric-${prop("deps.wthit")}")
 		runtimeOnly("lol.bai:badpackets:fabric-${prop("deps.badpackets")}")
 	}

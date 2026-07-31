@@ -19,7 +19,7 @@ import java.util.WeakHashMap;
 
 @Mixin(GoatRenderer.class)
 public class GoatMixins {
-	//? if <1.20 {
+	//? if <1.21 {
 	/*@Inject(method = "getTextureLocation(Lnet/minecraft/world/entity/animal/goat/Goat;)Lnet/minecraft/resources/ResourceLocation;",
 			at = @At("HEAD"), cancellable = true)
 	public void getTexture(Goat goatEntity, CallbackInfoReturnable<ResourceLocation> cir) {
@@ -27,7 +27,7 @@ public class GoatMixins {
 		cir.setReturnValue(new ResourceLocation("markedgoats", variety + ".png"));
 	}
 	*///?}
-	//? if >=1.20 && <1.21.2 {
+	//? if >=1.21 && <1.21.2 {
 	/*@Inject(method = "getTextureLocation(Lnet/minecraft/world/entity/animal/goat/Goat;)Lnet/minecraft/resources/ResourceLocation;",
 			at = @At("HEAD"), cancellable = true)
 	public void getTexture(Goat goatEntity, CallbackInfoReturnable<ResourceLocation> cir) {

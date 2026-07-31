@@ -3,7 +3,7 @@ package kiwi.allantaylor.markedgoats.util;
 import net.minecraft.world.entity.animal.goat.Goat;
 import org.spongepowered.asm.mixin.Unique;
 
-//? if >=1.20 && <1.21.2 {
+//? if >=1.20.5 && <1.21.2 {
 /*import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.Instrument;
@@ -25,7 +25,7 @@ public class GoatVariantUtil {
     @Unique
     private static final String SUFFIX = "_goat_horn";
 
-	//? if <1.20 {
+	//? if <1.20.5 {
 	/*@Unique
 	private static final String[] REGULAR_HORNS = {"ponder", "sing", "seek", "feel"};
 	@Unique
@@ -36,7 +36,7 @@ public class GoatVariantUtil {
 		return pool[new java.util.Random(goatEntity.getUUID().hashCode()).nextInt(pool.length)];
 	}
 	*///?}
-	//? if >=1.20 && <1.21.2 {
+	//? if >=1.20.5 && <1.21.2 {
 	/*// DataComponents.INSTRUMENT is a plain Holder<Instrument> here - the
 	// InstrumentComponent wrapper (and its .instrument() accessor) doesn't
 	// exist yet, so there's nothing to unwrap first.
