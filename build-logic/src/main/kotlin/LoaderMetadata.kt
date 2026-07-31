@@ -15,7 +15,7 @@ data class FabricManifest(
 	val icon: String,
 	val license: String,
 	val environment: String = "*",
-	val accessWidener: String,
+	val accessWidener: String?,
 	val entrypoints: Map<String, List<String>>,
 	val mixins: List<String>,
 	val depends: Map<String, String> = emptyMap(),
