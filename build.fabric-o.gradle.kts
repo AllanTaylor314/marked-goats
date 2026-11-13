@@ -123,11 +123,15 @@ val wailaPluginsJsonContent = if (project.hasProperty("deps.wthit-legacy-api")) 
 }
 val generateWailaPluginsJson = tasks.register("generateWailaPluginsJson") {
 	val outputFile = layout.buildDirectory.file("generated/modManifest/waila_plugins.json")
+	val jsonContent = wailaPluginsJsonContent
+
+	inputs.property("jsonContent", jsonContent)
 	outputs.file(outputFile)
+
 	doLast {
 		val file = outputFile.get().asFile
 		file.parentFile.mkdirs()
-		file.writeText(wailaPluginsJsonContent)
+		file.writeText(jsonContent)
 	}
 }
 tasks.named("processResources") { dependsOn(generateWailaPluginsJson) }
