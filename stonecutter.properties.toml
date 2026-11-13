@@ -1,20 +1,41 @@
-mod.id = "markedgoats"
-mod.name = "Marked Goats"
-mod.group = "kiwi.allantaylor"
-mod.version = "2.0.0"
-mod.channel_tag = "-alpha.0"
-mod.description = "Different textures for 8 different goats"
-mod.authors = ["AllanTaylor314"]
-mod.contributors = []
-mod.inception_year = "2026"
-mod.license.name = "MIT"
-mod.license.url = "https://github.com/AllanTaylor314/marked-goats/blob/main/LICENSE"
-mod.license.dist = "repo"
-mod.sources_url = "https://github.com/AllanTaylor314/marked-goats"
-mod.homepage_url = "https://modrinth.com/project/biTPC5IL"
-mod.issues_url = "https://github.com/AllanTaylor314/marked-goats/issues"
-mod.discord_url = ""
-mod.environment = "client"
+[mod]
+id = "markedgoats"
+name = "Marked Goats"
+group = "kiwi.allantaylor"
+version = "2.0.0"
+channel_tag = "-alpha.0"
+description = "Different textures for 8 different goats"
+authors = ["AllanTaylor314"]
+contributors = []
+inception_year = "2026"
+license.name = "MIT"
+license.url = "https://github.com/AllanTaylor314/marked-goats/blob/main/LICENSE"
+license.dist = "repo"
+environment = "client_only"
+sources_url = "https://github.com/AllanTaylor314/marked-goats"
+homepage_url = "https://modrinth.com/project/biTPC5IL"
+issues_url = "https://github.com/AllanTaylor314/marked-goats/issues"
+discord_url = ""
+dev_jvm_args = [
+	"-XX:+IgnoreUnrecognizedVMOptions",
+	"-XX:+UseZGC",
+	"-XX:+HeapDumpOnOutOfMemoryError",
+	"-XX:HeapDumpPath=heapdump.hprof",
+	"-XX:+ShowCodeDetailsInExceptionMessages",
+	"-XX:+UseCompactObjectHeaders",
+	"-XX:+AlwaysPreTouch",
+	"-XX:+UseStringDeduplication",
+	"-Dfile.encoding=UTF-8"
+]
+dev_jvm_args_mixin_debug = [
+	"-Dmixin.env.remapRefMap=true",
+	"-Dmixin.debug.verbose=true",
+	"-Dmixin.debug.verify=true",
+	"-Dmixin.debug.countInjections=true",
+	"-Dmixin.debug=true",
+	"-Dmixin.debug.export=true"
+]
+
 [[mod.pom.developers]]
 id = "AllanTaylor314"
 name = "Allan Taylor"

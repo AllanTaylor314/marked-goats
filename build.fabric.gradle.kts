@@ -1,6 +1,6 @@
 plugins {
 	id("mod-platform")
-	id("net.fabricmc.fabric-loom-remap")
+	id("dev.kikugie.loom-back-compat")
 }
 
 stonecutter {
@@ -14,7 +14,7 @@ stonecutter {
 }
 
 platform {
-	loader = "fabric-o"
+	loader = "fabric"
 	dependencies {
 		required("minecraft") {
 			fabricLikeVersionRange = if (project.hasProperty("deps.minecraft-range")) prop("deps.minecraft-range") else prop("deps.minecraft")
@@ -35,20 +35,22 @@ loom {
 	accessWidenerPath.set(
 		rootProject.file("src/main/resources/aw/${sc.current.version}.accesswidener").takeIf { it.exists() }
 	)
+	val devJvmArgs = propsList("mod", "dev_jvm_args") +
+	propsList("mod", "dev_jvm_args_mixin_debug")
 	runs.named("client") {
 		client()
-		ideConfigGenerated(true)
-		runDir = "run/"
-		environment = "client"
-		programArgs("--username=Dev")
-		configName = "Fabric Client"
+		generateRunConfig.set(true)
+		runDirectory.set(layout.projectDirectory.dir("run"))
+		programArguments.add("--username=Dev")
+		jvmArguments.addAll(devJvmArgs)
+		displayName.set("Fabric Client")
 	}
 	runs.named("server") {
 		server()
-		ideConfigGenerated(true)
-		runDir = "run/"
-		environment = "server"
-		configName = "Fabric Server"
+		generateRunConfig.set(true)
+		runDirectory.set(layout.projectDirectory.dir("run"))
+		jvmArguments.addAll(devJvmArgs)
+		displayName.set("Fabric Server")
 	}
 }
 
@@ -87,11 +89,13 @@ configurations.all {
 
 dependencies {
 	minecraft("com.mojang:minecraft:${prop("deps.minecraft")}")
-	mappings(
-		loom.layered {
+	if (sc.current.parsed < "26") {
+		mappings(loom.layered {
 			officialMojangMappings()
-			if (hasProperty("deps.parchment")) parchment("org.parchmentmc.data:parchment-${prop("deps.parchment")}@zip")
+			if (sc.properties.contains("deps.parchment"))
+				parchment("org.parchmentmc.data:parchment-${prop("deps.parchment")}@zip")
 		})
+	}
 	modImplementation("net.fabricmc:fabric-loader:${prop("deps.fabric-loader")}")
 	// implementation(libs.moulberry.mixinconstraints)
 	// include(libs.moulberry.mixinconstraints)

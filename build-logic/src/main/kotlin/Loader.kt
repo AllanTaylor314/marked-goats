@@ -1,20 +1,14 @@
 @file:Suppress("unused")
 
 import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import kotlinx.serialization.json.putJsonObject
-import net.peanuuutz.tomlkt.Toml
+import me.modmuss50.mpp.platforms.modrinth.ModrinthEnvironment
 import org.gradle.api.NamedDomainObjectContainer
 import java.util.*
 
-private val JSON = Json { prettyPrint = true; encodeDefaults = true; explicitNulls = false }
-private val TOML = Toml { }
-
 sealed class Loader(val id: String) {
-	abstract val jarTask: String
-	abstract val sourcesJarTask: String
 	abstract val modManifestPath: String
 	abstract val excludedResources: List<String>
 
@@ -22,8 +16,9 @@ sealed class Loader(val id: String) {
 
 	abstract fun generateManifest(ctx: Context): String
 
-	sealed class FabricLike(id: String) : Loader(id) {
+	object Fabric : Loader("fabric") {
 		override val isFabricLike = true
+		override val modManifestPath = "fabric.mod.json"
 		override val excludedResources = listOf(
 			"META-INF/mods.toml", "META-INF/neoforge.mods.toml", "aw/*.cfg", ".cache", "pack.mcmeta"
 		)
@@ -63,6 +58,15 @@ sealed class Loader(val id: String) {
 				description = ctx.description,
 				icon = "assets/icon.png",
 				license = ctx.licenseName,
+				environment = when (ctx.environment) {
+					ModrinthEnvironment.CLIENT_ONLY, ModrinthEnvironment.SINGLEPLAYER_ONLY -> "client"
+
+					ModrinthEnvironment.DEDICATED_SERVER_ONLY -> "server"
+
+					ModrinthEnvironment.SERVER_ONLY, ModrinthEnvironment.SERVER_ONLY_CLIENT_OPTIONAL,
+					ModrinthEnvironment.CLIENT_ONLY_SERVER_OPTIONAL, ModrinthEnvironment.CLIENT_AND_SERVER,
+					ModrinthEnvironment.CLIENT_OR_SERVER_PREFERS_BOTH, ModrinthEnvironment.CLIENT_OR_SERVER -> "*"
+				},
 				accessWidener = "aw/${ctx.currentMcVersion}.accesswidener".takeIf { awFile.exists() },
 				entrypoints = buildMap {
 //					"main" to listOf("${ctx.modGroup}.${ctx.modId}.platform.fabric.FabricEntrypoint"),
@@ -82,21 +86,7 @@ sealed class Loader(val id: String) {
 		}
 	}
 
-	object FabricM : FabricLike("fabric") {
-		override val jarTask = "jar"
-		override val sourcesJarTask = "sourcesJar"
-		override val modManifestPath = "fabric.mod.json"
-	}
-
-	object FabricO : FabricLike("fabric") {
-		override val jarTask = "remapJar"
-		override val sourcesJarTask = "remapSourcesJar"
-		override val modManifestPath = "fabric.mod.json"
-	}
-
 	sealed class ForgeLike(id: String) : Loader(id) {
-		override val jarTask = "jar"
-		override val sourcesJarTask = "sourcesJar"
 		override val excludedResources = listOf(
 			"fabric.mod.json", "aw/*.accesswidener", ".cache"
 		)
@@ -129,6 +119,7 @@ sealed class Loader(val id: String) {
 				modLoader = modLoaderId,
 				license = ctx.licenseName,
 				issueTrackerURL = ctx.issuesUrl,
+				clientSideOnly = !ctx.environmentPhysicalServer,
 				mods = listOf(
 					ForgeMod(
 						modId = ctx.modId,
@@ -172,13 +163,11 @@ sealed class Loader(val id: String) {
 		// confirmed via a real launch, so it keeps the default.
 		override val modLoaderId = "lowcodefml"
 		val mixinConfigAttribute = "MixinConfigs"
-		override val jarTask = "reobfJar"
 	}
 
 	companion object {
 		fun of(id: String): Loader = when (id) {
-			"fabric-o" -> FabricO
-			"fabric-m" -> FabricM
+			"fabric" -> Fabric
 			"neoforge" -> NeoForge
 			"forge" -> Forge
 			else -> error("Unknown loader: '$id'")

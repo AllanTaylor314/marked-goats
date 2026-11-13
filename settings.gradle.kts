@@ -21,13 +21,15 @@ pluginManagement {
 
 plugins {
 	id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
+	// Keep in sync with the `stonecutter` version in gradle/libs.versions.toml!
 	id("dev.kikugie.stonecutter") version "0.10"
+	id("dev.kikugie.loom-back-compat") version "0.4.3"
 }
 
 stonecutter {
 	create(rootProject) {
 		fun match(version: String, vararg loaders: String) =
-			loaders.forEach { version("$version-$it", version).buildscript = getBuildscript(it, version) }
+			loaders.forEach { version("$version-$it", version).buildscript = "build.$it.gradle.kts" }
 
 		// match("1.17.1", "fabric") /* fletching-table unsupported on JVM 16 */
 		match("1.18.1", "fabric")
@@ -54,13 +56,3 @@ stonecutter {
 	}
 }
 
-private fun getBuildscript(loader: String, version: String): String {
-	if (loader == "fabric") {
-		return if (version.startsWith("1.")) {
-			"build.fabric-o.gradle.kts"
-		} else {
-			"build.fabric-m.gradle.kts"
-		}
-	}
-	return "build.$loader.gradle.kts"
-}
