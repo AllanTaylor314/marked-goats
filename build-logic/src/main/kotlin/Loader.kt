@@ -129,7 +129,7 @@ sealed class Loader(val id: String) {
 						modUrl = ctx.homepageUrl,
 						logoFile = "assets/icon.png",
 						iconFile = "assets/icon.png",
-						// bannerFile = "assets/banner.png", // TODO: Make a banner image
+						bannerFile = "assets/banner.png",
 						authors = ctx.authors.joinToString(", "),
 						credits = "${ctx.authors.joinToString(", ")} Contributors: ${ctx.contributors.joinToString(", ")}",
 						description = ctx.description
