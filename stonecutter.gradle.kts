@@ -34,12 +34,12 @@ tasks.register("runActiveServer") {
 stonecutter parameters {
 	val (version, loader) = current.project.split('-', limit = 2)
 	constants.match(current.project.substringAfterLast('-'), "fabric", "neoforge", "forge")
-	swaps["mod_version"] = "\"${properties.get<String>("mod.version")}\";"
-	swaps["mod_id"] = "\"${properties.get<String>("mod.id")}\";"
-	swaps["mod_name"] = "\"${properties.get<String>("mod.name")}\";"
-	swaps["mod_group"] = "\"${properties.get<String>("mod.group")}\";"
+	swaps["mod_version"] = "\"${findProperty("mod.version")}\";"
+	swaps["mod_id"] = "\"${findProperty("mod.id")}\";"
+	swaps["mod_name"] = "\"${findProperty("mod.name")}\";"
+	swaps["mod_group"] = "\"${findProperty("mod.group")}\";"
 	swaps["minecraft"] = "\"${current.version}\";"
-	constants["release"] = properties.get<String>("mod.id") != "modtemplate"
+	constants["release"] = findProperty("mod.id") != "modtemplate"
 	constants["wthit_plugin"] = findProperty("$loader.$version.deps.wthit") != null
 	constants["wthit_plugin_legacy"] = findProperty("$loader.$version.deps.wthit-legacy-api") != null
 	constants["gametest"] = findProperty("$loader.$version.deps.gametest") != null

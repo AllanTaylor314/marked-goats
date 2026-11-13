@@ -26,7 +26,7 @@ val Project.sc: StonecutterBuildExtension
 	get() = extensions.getByType<StonecutterBuildExtension>()
 
 @OptIn(StonecutterExperimentalAPI::class)
-fun Project.prop(name: String): String = (project.sc.properties.get<String>(name))
+fun Project.prop(name: String): String = (project.sc.properties.get(name))
 
 fun Project.env(variable: String): String? = providers.environmentVariable(variable).orNull
 

@@ -11,11 +11,11 @@ class Context(
 	val stonecutter: StonecutterBuildExtension
 ) {
 	private fun require(key: String): String =
-		runCatching { project.sc.properties.get<String>(key) }.getOrNull()?.takeIf { it.isNotBlank() }
+		runCatching { project.sc.properties.get(key) }.getOrNull()?.takeIf { it.isNotBlank() }
 			?: error("Missing required property '$key' in stonecutter.properties.toml")
 
 	private fun optional(key: String, fallback: String = ""): String =
-		runCatching { project.sc.properties.get<String>(key) }.getOrNull()?.takeIf { it.isNotBlank() } ?: fallback
+		runCatching { project.sc.properties.get(key) }.getOrNull()?.takeIf { it.isNotBlank() } ?: fallback
 
 	val currentMcVersion: String by lazy {
 		stonecutter.current.version
