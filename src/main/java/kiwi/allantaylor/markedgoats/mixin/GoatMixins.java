@@ -68,7 +68,7 @@ public class GoatMixins {
         Goat goatEntity = renderStateToEntityMap.get(goatEntityRenderState);
         if (goatEntity != null) {
             String variety = GoatVariantUtil.getInstrumentNameFromGoat(goatEntity);
-			//? >= 26.1-snapshot-6 {
+			//? if >= 26.1-snapshot-6 {
 			/*// Tiny Takeover: New baby goat model added. Requires own texture
 			if (goatEntityRenderState.isBaby) {
 				cir.setReturnValue(ResourceLocation.fromNamespaceAndPath("markedgoats", variety + "_baby.png"));
