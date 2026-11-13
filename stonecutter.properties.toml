@@ -228,6 +228,13 @@ deps.modmenu = "20.0.1"
 deps.wthit = "20.0.0"
 deps.badpackets = "0.12.2"
 
+[fabric."26.3"]
+deps.minecraft = "26.3"
+deps.fabric-api = "0.165.2+26.3"
+deps.modmenu = "21.0.0"
+deps.wthit = "21.0.0"
+deps.badpackets = "0.12.3"
+
 [forge]
 
 [forge."1.19.2"]
