@@ -286,3 +286,5 @@ deps.neoforge = "26.2.0.57"
 [neoforge."26.3"]
 deps.minecraft = "26.3"
 deps.neoforge = "26.3.0.76"
+deps.wthit = "21.0.0"
+deps.badpackets = "0.12.3"

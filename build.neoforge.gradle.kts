@@ -67,15 +67,59 @@ neoForge {
 repositories {
 	mavenCentral()
 	strictMaven("https://api.modrinth.com/maven", "maven.modrinth") { name = "Modrinth" }
+	maven {
+		url = uri("https://maven2.bai.lol")
+		content {
+			includeGroup("lol.bai")
+			includeGroup("mcp.mobius.waila")
+		}
+	}
 }
 
 dependencies {
 	// implementation(libs.moulberry.mixinconstraints)
 	// jarJar(libs.moulberry.mixinconstraints)
+	if (project.hasProperty("deps.wthit")) {
+		val wthitApiVersion = if (project.hasProperty("deps.wthit-api")) prop("deps.wthit-api") else prop("deps.wthit")
+		compileOnly("mcp.mobius.waila:wthit-api:neo-$wthitApiVersion")
+		runtimeOnly("mcp.mobius.waila:wthit:neo-${prop("deps.wthit")}")
+		// BadPackets didn't exist yet for WTHIT releases old enough to still
+		// target 1.18/1.18.1 (its own first release postdates WTHIT's last
+		// 1.18.1 build by a month, confirmed via Modrinth) - optional here.
+		if (project.hasProperty("deps.badpackets")) {
+			runtimeOnly("lol.bai:badpackets:neo-${prop("deps.badpackets")}")
+		}
+	}
 }
 
 tasks.named("createMinecraftArtifacts") {
 	dependsOn(tasks.named("stonecutterGenerate"))
+}
+
+// Schema differs by WTHIT generation (legacy wants "initializer", modern
+// wants "entrypoints" and breaks if both are present) - generated per
+// version instead of static.
+val wailaPluginsJsonContent = if (project.hasProperty("deps.wthit-legacy-api")) {
+	"""{"markedgoats:plugin":{"initializer":"kiwi.allantaylor.markedgoats.MarkedGoatsWailaPlugin","side":"client"}}"""
+} else {
+	"""{"markedgoats:plugin":{"entrypoints":{"common":"kiwi.allantaylor.markedgoats.MarkedGoatsWailaPlugin","client":"kiwi.allantaylor.markedgoats.MarkedGoatsWailaPlugin"},"side":"client"}}"""
+}
+val generateWailaPluginsJson = tasks.register("generateWailaPluginsJson") {
+	val outputFile = layout.buildDirectory.file("generated/modManifest/waila_plugins.json")
+	val jsonContent = wailaPluginsJsonContent
+
+	inputs.property("jsonContent", jsonContent)
+	outputs.file(outputFile)
+
+	doLast {
+		val file = outputFile.get().asFile
+		file.parentFile.mkdirs()
+		file.writeText(jsonContent)
+	}
+}
+tasks.named("processResources") { dependsOn(generateWailaPluginsJson) }
+tasks.matching { it.name == "sourcesJar" }.configureEach {
+    dependsOn("generateWailaPluginsJson")
 }
 
 val syncTestDatapack = tasks.register("syncTestDatapack") {
