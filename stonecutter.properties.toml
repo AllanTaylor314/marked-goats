@@ -42,7 +42,7 @@ name = "Allan Taylor"
 url = "https://github.com/AllanTaylor314"
 
 [fabric]
-deps.fabric-loader = "0.19.2"
+deps.fabric-loader = "0.19.5"
 
 [fabric."1.17.1"]
 deps.minecraft = "1.17.1"
