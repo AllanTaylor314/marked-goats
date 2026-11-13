@@ -1,5 +1,6 @@
 package kiwi.allantaylor.markedgoats.mixin;
 
+import kiwi.allantaylor.markedgoats.MarkedGoatRenderState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -40,9 +41,12 @@ public class GoatMixins {
 	}
 	*///?}
 	//? if >=1.21.2 {
-    // Map to store the association between GoatEntityRenderState and GoatEntity
-    @Unique
-    private final WeakHashMap<GoatRenderState, Goat> renderStateToEntityMap = new WeakHashMap<>();
+
+	@Inject(method = "createRenderState()Lnet/minecraft/client/renderer/entity/state/GoatRenderState;",
+			at = @At("HEAD"), cancellable = true)
+	private void onCreateRenderState(CallbackInfoReturnable<GoatRenderState> cir) {
+		cir.setReturnValue(new MarkedGoatRenderState());
+	}
 
 	/**
 	 * Capture the association between the GoatEntity and GoatEntityRenderState during updateRenderState.
@@ -54,7 +58,9 @@ public class GoatMixins {
 	@Inject(method = "extractRenderState(Lnet/minecraft/world/entity/animal/goat/Goat;Lnet/minecraft/client/renderer/entity/state/GoatRenderState;F)V",
             at = @At("HEAD"))
     public void captureEntityRenderState(Goat goatEntity, GoatRenderState goatEntityRenderState, float f, CallbackInfo ci) {
-        renderStateToEntityMap.put(goatEntityRenderState, goatEntity);
+        if (goatEntityRenderState instanceof MarkedGoatRenderState state) {
+			state.hornVariant = GoatVariantUtil.getInstrumentNameFromGoat(goatEntity);
+		}
     }
 
 	/**
@@ -65,12 +71,11 @@ public class GoatMixins {
 	@Inject(method = "getTextureLocation(Lnet/minecraft/client/renderer/entity/state/GoatRenderState;)Lnet/minecraft/resources/ResourceLocation;",
             at = @At("HEAD"), cancellable = true)
     public void getTexture(GoatRenderState goatEntityRenderState, CallbackInfoReturnable<ResourceLocation> cir) {
-        Goat goatEntity = renderStateToEntityMap.get(goatEntityRenderState);
-        if (goatEntity != null) {
-            String variety = GoatVariantUtil.getInstrumentNameFromGoat(goatEntity);
+		if (goatEntityRenderState instanceof MarkedGoatRenderState state) {
+            String variety = state.hornVariant;
 			//? if >= 26.1-snapshot-6 {
 			/*// Tiny Takeover: New baby goat model added. Requires own texture
-			if (goatEntityRenderState.isBaby) {
+			if (state.isBaby) {
 				cir.setReturnValue(ResourceLocation.fromNamespaceAndPath("markedgoats", variety + "_baby.png"));
 				return;
 			}
