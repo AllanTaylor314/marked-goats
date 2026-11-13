@@ -1,0 +1,9 @@
+{
+  "pack": {
+    "pack_format": 48,
+    "supported_formats":[7, 999],
+    "min_format": 7,
+    "max_format": 999,
+    "description": "Marked Goats Dev Test Datapack"
+  }
+}

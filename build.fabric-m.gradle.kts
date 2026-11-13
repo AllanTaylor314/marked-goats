@@ -113,3 +113,21 @@ tasks.named("processResources") { dependsOn(generateWailaPluginsJson) }
 tasks.matching { it.name == "sourcesJar" }.configureEach {
     dependsOn("generateWailaPluginsJson")
 }
+
+val syncTestDatapack by tasks.registering {
+    val sourcePack = rootProject.file("dev/test_datapack")
+    val savesDir = layout.projectDirectory.dir("run/saves").asFile
+
+    doLast {
+        if (sourcePack.exists() && savesDir.exists()) {
+            savesDir.listFiles()?.filter { it.isDirectory }?.forEach { worldDir ->
+                val targetPack = File(worldDir, "datapacks/test_datapack")
+                sourcePack.copyRecursively(targetPack, overwrite = true)
+            }
+        }
+    }
+}
+
+tasks.matching { it.name.startsWith("runClient") || it.name.startsWith("runServer") }.configureEach {
+    dependsOn(syncTestDatapack)
+}

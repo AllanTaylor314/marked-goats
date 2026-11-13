@@ -1,0 +1,16 @@
+summon minecraft:goat 0 -50 0 {UUID:[I; 4096,0,0,0],NoAI:1b}
+summon minecraft:goat 3 -50 0 {UUID:[I; 16384,0,0,0],NoAI:1b}
+summon minecraft:goat 6 -50 0 {UUID:[I; 1,0,0,0],NoAI:1b}
+summon minecraft:goat 9 -50 0 {UUID:[I; 256,0,0,0],NoAI:1b}
+summon minecraft:goat 0 -50 3 {UUID:[I; 0,4096,0,0],IsScreamingGoat:1b,NoAI:1b}
+summon minecraft:goat 3 -50 3 {UUID:[I; 0,16384,0,0],IsScreamingGoat:1b,NoAI:1b}
+summon minecraft:goat 6 -50 3 {UUID:[I; 0,1,0,0],IsScreamingGoat:1b,NoAI:1b}
+summon minecraft:goat 9 -50 3 {UUID:[I; 0,256,0,0],IsScreamingGoat:1b,NoAI:1b}
+summon minecraft:goat 0 -50 6 {UUID:[I; 0,0,4096,0],Age:-24000,AgeLocked:1b,NoAI:1b}
+summon minecraft:goat 3 -50 6 {UUID:[I; 0,0,16384,0],Age:-24000,AgeLocked:1b,NoAI:1b}
+summon minecraft:goat 6 -50 6 {UUID:[I; 0,0,1,0],Age:-24000,AgeLocked:1b,NoAI:1b}
+summon minecraft:goat 9 -50 6 {UUID:[I; 0,0,256,0],Age:-24000,AgeLocked:1b,NoAI:1b}
+summon minecraft:goat 0 -50 9 {UUID:[I; 0,0,0,4096],IsScreamingGoat:1b,Age:-24000,AgeLocked:1b,NoAI:1b}
+summon minecraft:goat 3 -50 9 {UUID:[I; 0,0,0,16384],IsScreamingGoat:1b,Age:-24000,AgeLocked:1b,NoAI:1b}
+summon minecraft:goat 6 -50 9 {UUID:[I; 0,0,0,1],IsScreamingGoat:1b,Age:-24000,AgeLocked:1b,NoAI:1b}
+summon minecraft:goat 9 -50 9 {UUID:[I; 0,0,0,256],IsScreamingGoat:1b,Age:-24000,AgeLocked:1b,NoAI:1b}
