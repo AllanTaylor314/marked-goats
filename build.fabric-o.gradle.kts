@@ -134,3 +134,4 @@ val generateWailaPluginsJson = tasks.register("generateWailaPluginsJson") {
 	}
 }
 tasks.named("processResources") { dependsOn(generateWailaPluginsJson) }
+tasks.named("sourcesJar") { dependsOn(generateWailaPluginsJson) }
