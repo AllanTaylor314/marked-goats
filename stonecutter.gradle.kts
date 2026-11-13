@@ -4,8 +4,6 @@ import kotlin.collections.set
 
 
 plugins {
-	alias(libs.plugins.stonecutter)
-	alias(libs.plugins.dotenv)
 	alias(libs.plugins.fabric.loom).apply(false)
 	alias(libs.plugins.fabric.loom.remap).apply(false)
 	alias(libs.plugins.neoforged.moddev).apply(false)

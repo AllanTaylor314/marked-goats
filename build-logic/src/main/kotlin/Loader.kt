@@ -110,7 +110,7 @@ sealed class Loader(val id: String) {
 					forgeDeps.add(
 						ForgeDependency(
 							modId = it.modid.get(),
-							side = it.environment.get().uppercase(Locale.getDefault()),
+							side = it.environment.get().uppercase(Locale.ROOT),
 							versionRange = it.forgeLikeVersionRange.get(),
 							mandatory = type == "required",
 							type = type
@@ -137,6 +137,8 @@ sealed class Loader(val id: String) {
 						displayURL = ctx.homepageUrl,
 						modUrl = ctx.homepageUrl,
 						logoFile = "assets/icon.png",
+						iconFile = "assets/icon.png",
+						// bannerFile = "assets/banner.png", // TODO: Make a banner image
 						authors = ctx.authors.joinToString(", "),
 						credits = "${ctx.authors.joinToString(", ")} Contributors: ${ctx.contributors.joinToString(", ")}",
 						description = ctx.description

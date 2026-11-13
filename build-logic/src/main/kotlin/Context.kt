@@ -11,11 +11,11 @@ class Context(
 	val stonecutter: StonecutterBuildExtension
 ) {
 	private fun require(key: String): String =
-		runCatching { project.sc.properties.get(key) }.getOrNull()?.takeIf { it.isNotBlank() }
+		runCatching { project.sc.properties.getAs<String>(key) }.getOrNull()?.takeIf { it.isNotBlank() }
 			?: error("Missing required property '$key' in stonecutter.properties.toml")
 
 	private fun optional(key: String, fallback: String = ""): String =
-		runCatching { project.sc.properties.get(key) }.getOrNull()?.takeIf { it.isNotBlank() } ?: fallback
+		runCatching { project.sc.properties.getAs<String>(key) }.getOrNull()?.takeIf { it.isNotBlank() } ?: fallback
 
 	val currentMcVersion: String by lazy {
 		stonecutter.current.version
@@ -31,16 +31,17 @@ class Context(
 	val licenseUrl: String by lazy { require("mod.license.url") }
 	val licenseDist: String by lazy { optional("mod.license.dist", "repo") }
 	val inceptionYear: String by lazy { optional("mod.inception_year") }
+	val environment: String by lazy { optional("mod.environment", "both") }
 
 	val authors: List<String> by lazy {
 		runCatching {
-			project.sc.properties.raw("mod", "authors").asList().map { it.toString() }
+			project.sc.properties.raw("mod.authors").asList().map { it.toString() }
 		}.getOrElse { error("Missing or malformed 'mod.authors' in stonecutter.properties.toml") }
 	}
 
 	val contributors: List<String> by lazy {
 		runCatching {
-			project.sc.properties.raw("mod", "contributors").asList().map { it.toString() }
+			project.sc.properties.raw("mod.contributors").asList().map { it.toString() }
 		}.getOrElse { emptyList() }
 	}
 
@@ -56,13 +57,13 @@ class Context(
 	val basicVersion: String by lazy { "$baseVersion$snapshotSuffix" }
 
 	val publishAdditionalVersions: List<String> by lazy {
-		project.sc.properties.rawOrNull("publish", "additionalVersions")?.to<List<String>>().orEmpty()
+		project.sc.properties.rawOrNull("publish.additionalVersions")?.to<List<String>>().orEmpty()
 	}
 
 	val javaVersion: JavaVersion by lazy {
 		when {
 			stonecutter.eval(currentMcVersion, ">=26") -> JavaVersion.VERSION_25
-			stonecutter.eval(currentMcVersion, ">=1.20.6") -> JavaVersion.VERSION_21
+			stonecutter.eval(currentMcVersion, ">=1.20.5") -> JavaVersion.VERSION_21
 			stonecutter.eval(currentMcVersion, ">=1.18") -> JavaVersion.VERSION_17
 			stonecutter.eval(currentMcVersion, ">=1.17") -> JavaVersion.VERSION_16
 			else -> JavaVersion.VERSION_1_8

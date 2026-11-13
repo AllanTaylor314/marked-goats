@@ -11,6 +11,7 @@ import org.gradle.api.artifacts.repositories.MavenArtifactRepository
 import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.provider.Property
+import org.gradle.jvm.toolchain.JavaLanguageVersion
 import org.gradle.api.tasks.Copy
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.OutputFile
@@ -20,6 +21,7 @@ import org.gradle.jvm.tasks.Jar
 import org.gradle.kotlin.dsl.*
 import org.gradle.language.jvm.tasks.ProcessResources
 import org.gradle.plugins.ide.idea.model.IdeaModel
+import java.util.Properties
 import javax.inject.Inject
 
 val Project.sc: StonecutterBuildExtension
@@ -28,7 +30,12 @@ val Project.sc: StonecutterBuildExtension
 @OptIn(StonecutterExperimentalAPI::class)
 fun Project.prop(name: String): String = (project.sc.properties.get(name))
 
-fun Project.env(variable: String): String? = providers.environmentVariable(variable).orNull
+fun Project.env(variable: String): String? {
+	providers.environmentVariable(variable).orNull?.let { return it }
+	return rootProject.file(".env").takeIf { it.exists() }?.let { f ->
+		Properties().apply { f.inputStream().use(::load) }.getProperty(variable)
+	}
+}
 
 fun Project.envTrue(variable: String): Boolean = env(variable)?.toDefaultLowerCase() == "true"
 
@@ -70,6 +77,9 @@ abstract class ModPlatformPlugin @Inject constructor() : Plugin<Project> {
 			)
 		}
 
+		val (version, loader) = name.split('-', limit = 2)
+		project.sc.properties.tags(version, loader)
+
 		afterEvaluate {
 			val ctx = Context(
 				project = this,
@@ -104,6 +114,7 @@ abstract class ModPlatformPlugin @Inject constructor() : Plugin<Project> {
 		configureModPublishing(ctx)
 
 		if (envTrue("PUB_MAVEN_ENABLE")) {
+			apply(plugin = "com.vanniktech.maven.publish")
 			configureMavenPublishing(ctx)
 		}
 	}
@@ -114,6 +125,9 @@ abstract class ModPlatformPlugin @Inject constructor() : Plugin<Project> {
 			withJavadocJar()
 			sourceCompatibility = ctx.javaVersion
 			targetCompatibility = ctx.javaVersion
+			toolchain {
+				languageVersion.set(JavaLanguageVersion.of(ctx.javaVersion.majorVersion))
+			}
 		}
 	}
 
@@ -134,12 +148,14 @@ abstract class ModPlatformPlugin @Inject constructor() : Plugin<Project> {
 	}
 
 	private fun Project.configureProcessResources(ctx: Context) {
+		val javaVersionValue = "JAVA_${ctx.javaVersion.majorVersion}"
+		val excluded = ctx.loader.excludedResources
 		tasks.named<ProcessResources>("processResources") {
 			dependsOn(tasks.named("stonecutterGenerate"), "kspKotlin")
 			filesMatching("*.mixins.json") {
-				expand("java" to "JAVA_${ctx.javaVersion.majorVersion}")
+				expand("java" to javaVersionValue)
 			}
-			exclude(ctx.loader.excludedResources)
+			exclude(excluded)
 		}
 	}
 

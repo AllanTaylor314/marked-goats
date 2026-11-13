@@ -4,9 +4,6 @@ plugins {
 }
 
 stonecutter {
-	val (version, loader) = current.project.split('-', limit = 2)
-	properties.tags(version, loader)
-
 	replacements.string(current.parsed >= "1.21.11") {
 		replace("ResourceLocation", "Identifier")
 		replace("location()", "identifier()")
@@ -20,7 +17,7 @@ platform {
 			forgeLikeVersionRange = prop("deps.minecraft")
 		}
 		required("neoforge") {
-			forgeLikeVersionRange.set("[1,)")
+			forgeLikeVersionRange.set("[${prop("deps.neoforge")},)")
 		}
 	}
 }
@@ -35,7 +32,7 @@ neoForge {
 	}
 	validateAccessTransformers = true
 
-	if (hasProperty("deps.parchment")) parchment {
+	if (sc.properties.contains("deps.parchment")) parchment {
 		val (mc, ver) = prop("deps.parchment").split(':')
 		mappingsVersion = ver
 		minecraftVersion = mc
@@ -60,7 +57,7 @@ neoForge {
 			sourceSet(sourceSets["main"])
 		}
 	}
-	sourceSets["main"].resources.srcDir("${rootDir}/versions/datagen/${sc.current.version.split("-")[0]}/src/main/generated")
+	sourceSets["main"].resources.srcDir("${rootDir}/versions/datagen/${sc.current.version}/src/main/generated")
 }
 
 repositories {

@@ -4,9 +4,6 @@ plugins {
 }
 
 stonecutter {
-	val (version, loader) = current.project.split('-', limit = 2)
-	properties.tags(version, loader)
-
 	replacements.string(current.parsed >= "1.21.11") {
 		replace("ResourceLocation", "Identifier")
 		replace("location()", "identifier()")
@@ -56,7 +53,7 @@ loom {
 
 fabricApi {
 	configureDataGeneration {
-		outputDirectory = file("${rootDir}/versions/datagen/${sc.current.version.split("-")[0]}/src/main/generated")
+		outputDirectory = file("${rootDir}/versions/datagen/${sc.current.version}/src/main/generated")
 		client = true
 	}
 }

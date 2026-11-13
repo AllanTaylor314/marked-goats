@@ -44,6 +44,8 @@ data class ForgeMod(
 	val displayURL: String,
 	val modUrl: String,
 	val logoFile: String,
+	val iconFile: String,
+	val bannerFile: String = "",
 	val authors: String,
 	val logoBlur: Boolean = false,
 	val credits: String,

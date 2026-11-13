@@ -4,9 +4,6 @@ plugins {
 }
 
 stonecutter {
-	val (version, loader) = current.project.split('-', limit = 2)
-	properties.tags(version, loader)
-
 	replacements.string(current.parsed >= "1.21.11") {
 		replace("ResourceLocation", "Identifier")
 		replace("location()", "identifier()")
@@ -20,7 +17,7 @@ platform {
 			forgeLikeVersionRange = prop("deps.minecraft")
 		}
 		required("forge") {
-			forgeLikeVersionRange.set("[1,)")
+			forgeLikeVersionRange.set("[${prop("deps.forge")},)")
 		}
 	}
 }
@@ -79,7 +76,7 @@ dependencies {
 sourceSets {
 	main {
 		resources.srcDir(
-			"${rootDir}/versions/datagen/${sc.current.version.split("-")[0]}/src/main/generated"
+			"${rootDir}/versions/datagen/${sc.current.version}/src/main/generated"
 		)
 	}
 }
