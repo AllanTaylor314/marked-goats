@@ -9,7 +9,6 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.Instrument;
 *///?}
 //? if >=1.21.5 && <26.1-snapshot-3 {
-import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.EitherHolder;
 import net.minecraft.world.item.Instrument;
@@ -20,6 +19,9 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.Instrument;
 *///?}
 
+/**
+ * Utilities for finding instrument names from goats
+ */
 public class GoatVariantUtil {
 
     @Unique
@@ -54,10 +56,12 @@ public class GoatVariantUtil {
 	}
 	*///?}
 	//? if >=1.21.5 {
-    /**
-     * Converts a goat horn instrument entry to a simple variety string.
-     * Example: "minecraft:ponder_goat_horn" -> "ponder"
-     */
+	/**
+	 * Converts a goat horn instrument entry to a simple variety string.
+	 * Example: "minecraft:ponder_goat_horn" -> "ponder"
+	 * @param instrumentEntry e.g. "minecraft:ponder_goat_horn"
+	 * @return e.g. "ponder"
+	*/
 	//~ if >=26.1-snapshot-3 'EitherHolder' -> 'Holder' {
 	public static String getNameFromInstrument(EitherHolder<Instrument> instrumentEntry) {
 		//~ if >=26.1-snapshot-3 '.key()' -> '.unwrapKey()'
@@ -73,6 +77,11 @@ public class GoatVariantUtil {
                 .orElse("");
     }
 
+	/**
+	 * Get the name of a horn dropped by a goat
+	 * @param goatEntity The goat
+	 * @return Instrument name e.g. "ponder"
+	 */
     public static String getInstrumentNameFromGoat(Goat goatEntity) {
         return getNameFromInstrument(goatEntity.createHorn().get(DataComponents.INSTRUMENT).instrument());
     }

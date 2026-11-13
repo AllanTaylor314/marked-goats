@@ -13,6 +13,7 @@ import java.util.Set;
 import java.util.UUID;
 *///?}
 
+@SuppressWarnings("MissingJavadoc")
 public class GoatVariantGameTests {
 
 	//? if gametest {

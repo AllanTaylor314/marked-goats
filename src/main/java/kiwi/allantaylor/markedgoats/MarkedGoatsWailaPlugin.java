@@ -13,14 +13,21 @@ import java.util.Optional;
 
 import static kiwi.allantaylor.markedgoats.util.GoatVariantUtil.getInstrumentNameFromGoat;
 
+/**
+ * A plugin for WAILA
+ * Adds horn icon (use with resource pack), instrument type, and "Screaming Goat" in name
+ */
 public class MarkedGoatsWailaPlugin implements IWailaCommonPlugin, IWailaClientPlugin, IEntityComponentProvider {
 
-    public static final ResourceLocation SHOW_ICON = ResourceLocation.parse("marked_goats:show_icon");
-    public static final ResourceLocation SHOW_INSTRUMENT = ResourceLocation.parse("marked_goats:show_instrument");
-    public static final ResourceLocation SHOW_IS_SCREAMING = ResourceLocation.parse("marked_goats:show_is_screaming");
+	/// Whether to show the horn icon in the HUD
+	public static final ResourceLocation SHOW_ICON = ResourceLocation.parse("marked_goats:show_icon");
+	/// Whether to show the instrument name (e.g. Ponder) in the HUD
+	public static final ResourceLocation SHOW_INSTRUMENT = ResourceLocation.parse("marked_goats:show_instrument");
+	/// Whether to replace "Goat" with "Screaming Goat" in the entity name
+	public static final ResourceLocation SHOW_IS_SCREAMING = ResourceLocation.parse("marked_goats:show_is_screaming");
 
-    // Remove the cooldown overlay from icons
-    public static final UseCooldown FAKE_COOLDOWN = new UseCooldown(0, Optional.of(ResourceLocation.parse("marked_goats:fake_horn_cooldown")));
+    /// A fake cooldown component to apply to the horn icon so that it doesn't show the cooldown overlay when the player has recently used the horn.
+	private static final UseCooldown FAKE_COOLDOWN = new UseCooldown(0, Optional.of(ResourceLocation.parse("marked_goats:fake_horn_cooldown")));
 
     @Override
     public void register(ICommonRegistrar registrar) {

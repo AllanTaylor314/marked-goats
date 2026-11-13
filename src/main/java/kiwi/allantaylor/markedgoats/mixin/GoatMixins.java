@@ -17,6 +17,10 @@ import net.minecraft.client.renderer.entity.state.GoatRenderState;
 import java.util.WeakHashMap;
 //?}
 
+/**
+ * Mixins for the GoatRenderer
+ * Captures some entities, replaces some textures
+ */
 @Mixin(GoatRenderer.class)
 public class GoatMixins {
 	//? if <1.21 {
@@ -40,19 +44,25 @@ public class GoatMixins {
     @Unique
     private final WeakHashMap<GoatRenderState, Goat> renderStateToEntityMap = new WeakHashMap<>();
 
-    /**
-     * Capture the association between the GoatEntity and GoatEntityRenderState during updateRenderState.
-     */
-    @Inject(method = "extractRenderState(Lnet/minecraft/world/entity/animal/goat/Goat;Lnet/minecraft/client/renderer/entity/state/GoatRenderState;F)V",
+	/**
+	 * Capture the association between the GoatEntity and GoatEntityRenderState during updateRenderState.
+	 * @param goatEntity The goat - used to get UUID and isScreaming later
+	 * @param goatEntityRenderState Matching render state (so we can find the goat later)
+	 * @param f ignored
+	 * @param ci ignored
+	 */
+	@Inject(method = "extractRenderState(Lnet/minecraft/world/entity/animal/goat/Goat;Lnet/minecraft/client/renderer/entity/state/GoatRenderState;F)V",
             at = @At("HEAD"))
     public void captureEntityRenderState(Goat goatEntity, GoatRenderState goatEntityRenderState, float f, CallbackInfo ci) {
         renderStateToEntityMap.put(goatEntityRenderState, goatEntity);
     }
 
-    /**
-     * Override the texture if the render state corresponds to a screaming goat.
-     */
-    @Inject(method = "getTextureLocation(Lnet/minecraft/client/renderer/entity/state/GoatRenderState;)Lnet/minecraft/resources/ResourceLocation;",
+	/**
+	 * Override the texture if the render state corresponds to a screaming goat.
+	 * @param goatEntityRenderState used to find the original goat
+	 * @param cir used to replace the texture
+	 */
+	@Inject(method = "getTextureLocation(Lnet/minecraft/client/renderer/entity/state/GoatRenderState;)Lnet/minecraft/resources/ResourceLocation;",
             at = @At("HEAD"), cancellable = true)
     public void getTexture(GoatRenderState goatEntityRenderState, CallbackInfoReturnable<ResourceLocation> cir) {
         Goat goatEntity = renderStateToEntityMap.get(goatEntityRenderState);
