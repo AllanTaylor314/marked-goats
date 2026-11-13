@@ -143,7 +143,7 @@ tasks.matching { it.name == "sourcesJar" }.configureEach {
     dependsOn("generateWailaPluginsJson")
 }
 
-val syncTestDatapack by tasks.registering {
+val syncTestDatapack = tasks.register("syncTestDatapack") {
     val sourcePack = rootProject.file("dev/test_datapack")
     val savesDir = layout.projectDirectory.dir("run/saves").asFile
 

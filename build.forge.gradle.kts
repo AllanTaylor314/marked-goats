@@ -89,7 +89,7 @@ tasks.named("createMinecraftArtifacts") {
 	dependsOn(tasks.named("stonecutterGenerate"))
 }
 
-val syncTestDatapack by tasks.registering {
+val syncTestDatapack = tasks.register("syncTestDatapack") {
     val sourcePack = rootProject.file("dev/test_datapack")
     val savesDir = layout.projectDirectory.dir("run/saves").asFile
 
