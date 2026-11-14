@@ -1,3 +1,4 @@
+//? if >= 1.21.2 {
 package kiwi.allantaylor.markedgoats.mixin;
 
 import kiwi.allantaylor.markedgoats.MarkedGoatStateAccess;
@@ -20,3 +21,4 @@ public class GoatRenderStateMixin implements MarkedGoatStateAccess {
 		this.markedgoats$hornVariant = variant;
 	}
 }
+//? }
