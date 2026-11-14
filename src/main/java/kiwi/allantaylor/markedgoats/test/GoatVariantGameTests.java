@@ -1,7 +1,7 @@
 package kiwi.allantaylor.markedgoats.test;
 
 //? if gametest {
-/*import kiwi.allantaylor.markedgoats.util.GoatVariantUtil;
+import kiwi.allantaylor.markedgoats.util.GoatVariantUtil;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTestHelper;
@@ -11,13 +11,13 @@ import net.minecraft.world.entity.animal.goat.Goat;
 
 import java.util.Set;
 import java.util.UUID;
-*///?}
+//?}
 
 @SuppressWarnings("MissingJavadoc")
 public class GoatVariantGameTests {
 
 	//? if gametest {
-	/*private static final Set<String> REGULAR_INSTRUMENTS = Set.of("ponder", "sing", "seek", "feel");
+	private static final Set<String> REGULAR_INSTRUMENTS = Set.of("ponder", "sing", "seek", "feel");
 	private static final Set<String> SCREAMING_INSTRUMENTS = Set.of("admire", "call", "yearn", "dream");
 
 	@GameTest
@@ -43,5 +43,5 @@ public class GoatVariantGameTests {
 				Component.literal("Expected a screaming instrument, got '" + instrument + "'"));
 		helper.succeed();
 	}
-	*///?}
+	//?}
 }
